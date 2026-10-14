@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Doodle Space | Personal Portal</title>
+  <link id="site-favicon" rel="icon" type="image/svg+xml" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
+  <script>
+    let language = "en";
+    try { if (localStorage.getItem("doodle_language_v1") === "zh-CN") language = "zh-CN"; } catch (_) {}
+    const EN = {"⚙ 管理": "⚙ Manage", "⚙ 主页管理": "⚙ Homepage manager", "关闭": "Close", "← 返回菜单": "← Back to menu", "站点管理": "Websites", "分类管理": "Categories", "主页设置": "Page settings", "配置备份": "Backup", "添加、编辑与排序 →": "Add, edit & reorder →", "添加、修改与排序 →": "Add, rename & reorder →", "标题、简介与主题 →": "Title, bio & theme →", "导出配置 →": "Export configuration →", "＋ 添加站点": "＋ Add website", "＋ 添加": "＋ Add", "✎ 标题、图标与简介": "✎ Title, icon & bio", "⇩ 导出配置 JSON": "⇩ Export configuration JSON", "使用 ↑ ↓ 调整站点顺序，首页和分类筛选会按此顺序显示。": "Use ↑ ↓ to reorder websites. The homepage and category filters follow this order.", "使用 ↑ ↓ 排列标签。重命名会同步更新站点；删除分类后，站点归入“未分类”。": "Use ↑ ↓ to reorder categories. Renaming updates websites; deleting moves them to Uncategorized.", "导出标题、简介、分类、站点及排列顺序。": "Export the title, bio, categories, websites and their order.", "新分类名称": "New category name", "分类名称": "Category name", "✎ 添加或编辑站点卡片": "✎ Add or edit a website", "站点名称": "Website name", "站点地址 (URL)": "Website address (URL)", "分类标签": "Category", "一句话简介": "Short description", "例如：我的个人博客 / 家庭 NAS 面板": "e.g. My blog / Home NAS dashboard", "简单描述这个站点的功能或用途...": "Briefly describe this website...", "删除站点": "Delete website", "取消": "Cancel", "保存站点": "Save website", "保存设置": "Save settings", "✎ 修改标题、图标与简介": "✎ Edit title, icon & bio", "主页主标题": "Homepage title", "个人简介 / 欢迎语": "Bio / welcome message", "✎ 随手涂鸦板 (在下方空白处画两笔)": "✎ Doodle pad (draw something below)", "擦除重画": "Clear drawing", "搜索名称、简介、分类或网址…": "Search title, description, category or URL…", "全部": "All", "未分类": "Uncategorized", "访问 ↗": "Visit ↗", "保存": "Save", "删除": "Delete", "✎ 编辑": "✎ Edit", "上移分类": "Move category up", "下移分类": "Move category down", "上移网页": "Move website up", "下移网页": "Move website down", "还没有站点，点击上方“添加站点”。": "No websites yet. Choose “Add website” above.", "请输入 1–40 个字符的分类名称，不能使用“全部”或“未分类”。": "Enter a category name of 1–40 characters. “All” and “Uncategorized” are reserved.", "这个分类已经存在。": "This category already exists.", "◐ 跟随系统": "◐ System theme", "☀ 浅色模式": "☀ Light mode", "☾ 深色模式": "☾ Dark mode", "Hand-drawn Minimalist Portal · 纯静态单文件 HTML，可直接部署至 GitHub Pages / Vercel / NAS": "Hand-drawn Minimalist Portal · Single-file HTML for GitHub Pages / Vercel / NAS", "界面语言": "Interface language", "⇧ 导入配置 JSON": "⇧ Import configuration JSON", "导入会替换当前标题、简介、分类及站点。": "Import replaces the current title, bio, categories and websites.", "导入成功。": "Configuration imported.", "导入失败：": "Import failed: ", "从 URL 导入": "Import from URL", "配置 JSON 链接": "Configuration JSON URL", "导入中…": "Importing…", "填写可直接访问的 JSON 链接；跨站链接需要允许跨域访问（CORS）。": "Use a direct JSON URL. Cross-origin links must allow CORS.", "请求超时，请重试。": "Request timed out. Try again.", "无法读取链接，请检查地址、网络及跨域权限（CORS）。": "Unable to read the URL. Check the address, network and CORS permissions.", "文件不能超过 2 MB。": "File must not exceed 2 MB.", "只支持 HTTP 或 HTTPS 链接。": "Only HTTP and HTTPS URLs are supported.", "导入来源": "Import source", "导出备份": "Export backup", "恢复备份": "Restore backup", "本地文件": "Local file", "URL 链接": "URL link", "选择 JSON 文件": "Choose JSON file", "保存当前标题、简介、分类、站点及顺序，方便以后恢复。": "Save the current title, bio, categories, websites and order for later restoration.", "选择之前导出的 JSON 文件（最大 2 MB）。": "Choose a previously exported JSON file (up to 2 MB).", "文件读取并校验后，会请你确认是否替换当前配置。": "After reading and validating the backup, you will be asked to confirm replacing the current configuration.", "读取链接并导入": "Read URL & import", "卡片图标": "Card icon", "星星": "Star", "齿轮": "Gear", "书本": "Book", "闪电": "Lightning", "地球": "Globe", "代码": "Code", "房屋": "Home", "爱心": "Heart", "清空搜索": "Clear search", "没有找到匹配的站点": "No matching websites", "试试更少的关键词，或清除筛选。": "Try fewer keywords or clear the filters.", "清除搜索和分类筛选": "Clear search and category filters", "搜索站点": "Search websites", "浏览器标签页标题": "Browser tab title", "留空使用默认标题": "Leave blank to use the default title", "显示在浏览器标签页，与页面主标题独立。": "Shown in the browser tab, independently of the homepage heading.", "浏览器标签页图标": "Browser tab icon", "与标题一起保存，刷新后保留。": "Saved together with the title and retained after refresh.", "页脚署名": "Footer name", "GitHub 地址": "GitHub URL", "留空使用主页标题": "Leave blank to use the homepage title", "例如：https://github.com/你的用户名": "e.g. https://github.com/your-username", "外观模式": "Appearance", "跟随系统": "Follow system", "切换为浅色": "Switch to light", "切换为深色": "Switch to dark", "恢复默认设置": "Restore defaults", "重置站点、分类、标题、图标、语言和主题。": "Reset websites, categories, titles, icons, language and theme."};
+    function t(text) { return language === "en" ? (EN[text] || text) : text; }
+    document.documentElement.lang = language;
+    // Resolve the theme before paint to avoid a bright flash on dark devices.
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    let themePreference = "light";
+    try {
+      const saved = localStorage.getItem("doodle_theme_v1");
+      if (["system", "light", "dark"].includes(saved)) themePreference = saved;
+    } catch (_) {}
+    function applyTheme() {
+      const dark = themePreference === "dark" ||
+        (themePreference === "system" && systemTheme.matches);
+      document.documentElement.setAttribute("data-theme", dark ? "chalk" : "paper");
+      const button = document.getElementById("manual-theme-btn");
+      const follow = document.getElementById("follow-system");
+      if (button && follow) {
+        follow.checked = themePreference === "system";
+        button.disabled = follow.checked;
+        button.textContent = t(dark ? "☾ 深色模式" : "☀ 浅色模式");
+        button.setAttribute("aria-pressed", String(dark));
+        button.setAttribute("aria-label", t(dark ? "切换为浅色" : "切换为深色"));
+      }
+    }
+    applyTheme();
+    systemTheme.addEventListener("change", applyTheme);
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f5f0;
+      --ink: #141414;
+      --ink-muted: #5a5a5a;
+      --card-bg: #fcfaf5;
+      --accent-fill: #f0eee9;
+      --dot-color: #d8d5ce;
+      --shadow-ink: #141414;
+      --border-ink: #141414;
+    }
+
+    [data-theme="chalk"] {
+      color-scheme: dark;
+      --bg: #090909;
+      --ink: #c5c3bc;
+      --ink-muted: #999a95;
+      --card-bg: #121212;
+      --accent-fill: #1e1e1e;
+      --dot-color: #222222;
+      --border-ink: #777777;
+      --shadow-ink: #444444;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--ink-muted);
+      opacity: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--dot-color) 1.25px, transparent 1.25px);
+      background-size: 22px 22px;
+      color: var(--ink);
+      font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", "LXGW WenKai Lite", "Kaiti SC", "STKaiti", "KaiTi", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2.5rem 1.25rem 4rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Hand-drawn Wobbly Box Style */
+    .sketch-box {
+      background: var(--card-bg);
+      border: 2.5px solid var(--border-ink);
+      border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      box-shadow: 4px 4px 0px var(--shadow-ink);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.2s ease;
+    }
+
+    .sketch-box-alt {
+      background: var(--card-bg);
+      border: 2.5px solid var(--border-ink);
+      border-radius: 15px 235px 15px 245px / 245px 15px 225px 15px;
+      box-shadow: 4px 4px 0px var(--shadow-ink);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.2s ease;
+    }
+
+    .sketch-btn {
+      background: var(--card-bg);
+      color: var(--ink);
+      border: 2px solid var(--border-ink);
+      border-radius: 220px 18px 200px 18px / 18px 210px 16px 230px;
+      box-shadow: 3px 3px 0px var(--shadow-ink);
+      padding: 0.45rem 0.95rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, background-color 0.14s ease;
+    }
+
+
+    /* Move crisp, unrotated surfaces by whole layout pixels instead of transforms. */
+    .sketch-btn, .import-choice, .icon-option, .search-wrapper, .language-picker,
+    .hero, .doodle-pad-section, .theme-switch-track,
+    .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+    .form-group textarea, .form-group select:not(#language-select) {
+      position: relative;
+      left: 0;
+      top: 0;
+      transition: box-shadow 140ms ease, background-color 140ms ease, border-color 140ms ease;
+    }
+    .lift-hitbox:hover > .sketch-btn.active {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .lift-hitbox:hover > .sketch-btn:disabled,
+    .lift-hitbox:hover > #manual-theme-btn:disabled {
+      left: 0;
+      top: 0;
+    }
+
+    .lift-hitbox:hover > .sketch-btn {
+      left: -2px; top: -2px;
+      box-shadow: 5px 5px 0px var(--shadow-ink);
+      background: var(--accent-fill);
+    }
+
+    .sketch-btn:active {
+      left: 2px; top: 2px;
+      box-shadow: 1px 1px 0px var(--shadow-ink);
+    }
+
+    .sketch-btn.active {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    /* Top Bar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--accent-fill);
+      border: 2px dashed var(--border-ink);
+      border-radius: 18px 180px 16px 190px / 190px 16px 180px 18px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    /* Hero Header */
+    .hero {
+      padding: 2rem 2.2rem;
+      margin-bottom: 2.2rem;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .hero-tape {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1.5deg);
+      width: 110px;
+      height: 26px;
+      background: var(--accent-fill);
+      border: 2px solid var(--border-ink);
+      opacity: 0.92;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .scribble-underline {
+      display: block;
+      width: 210px;
+      height: 12px;
+      margin-top: 2px;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-bio {
+      color: var(--ink-muted);
+      font-size: 1.02rem;
+      max-width: 580px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-doodle {
+      width: 135px;
+      height: 135px;
+      flex-shrink: 0;
+    }
+
+    /* Controls: Search & Category Filter */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+      max-width: 310px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 0.9rem 0.5rem 2.2rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: var(--card-bg);
+      color: var(--ink);
+      border: 2px solid var(--border-ink);
+      border-radius: 190px 15px 185px 15px / 15px 185px 15px 195px;
+      box-shadow: 3px 3px 0px var(--shadow-ink);
+      outline: none;
+    }
+
+    .search-input { padding-right: 2.4rem; }
+    .clear-search { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border: 0; border-radius: 50%; background: var(--accent-fill); color: var(--ink); font: inherit; cursor: pointer; }
+    .clear-search:focus-visible { outline: 2px dashed var(--ink); outline-offset: 2px; }
+    .search-status { margin: -0.8rem 0 1.2rem; }
+    .search-empty { grid-column: 1 / -1; padding: 2rem 1.3rem; text-align: center; }
+    .search-empty p { margin: 0.5rem 0 1rem; }
+    .search-wrapper { max-width: 360px; }
+    .search-input:focus {
+      background: var(--accent-fill);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.7rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+
+    /* Grid of Site Cards */
+    .sites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .site-card {
+      padding: 1.35rem 1.4rem;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 175px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .site-card:hover {
+      transform: translate(-3px, -3px) rotate(-0.6deg);
+      box-shadow: 7px 7px 0px var(--shadow-ink);
+    }
+
+    .site-card:nth-child(even):hover {
+      transform: translate(-3px, -3px) rotate(0.6deg);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .card-icon {
+      width: 38px;
+      height: 38px;
+      border: 2px solid var(--border-ink);
+      border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-fill);
+      flex-shrink: 0;
+    }
+
+    .card-tag {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border: 1.8px solid var(--border-ink);
+      border-radius: 120px 12px 110px 12px / 12px 115px 12px 125px;
+      background: var(--bg);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding-top: 0.6rem;
+      border-top: 1.5px dashed var(--border-ink);
+    }
+
+    .card-url {
+      color: var(--ink-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 190px;
+    }
+
+    /* Interactive Mini Doodle Pad Section */
+    .doodle-pad-section {
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .doodle-pad-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .doodle-canvas {
+      width: 100%;
+      height: 150px;
+      background: var(--bg);
+      border: 2px dashed var(--border-ink);
+      border-radius: 12px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    /* Modal for editing sites */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 540px;
+      padding: 1.6rem;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .form-group {
+      margin-bottom: 0.9rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.5rem 0.9rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: var(--card-bg);
+      color: var(--ink);
+      border: 2px solid var(--border-ink);
+      border-radius: 190px 15px 185px 15px / 15px 185px 15px 195px;
+      box-shadow: 3px 3px 0 var(--shadow-ink);
+      outline: none;
+    }
+    .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]):focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      background: var(--accent-fill);
+    }
+
+    footer a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--border-ink); }
+    footer a:hover { color: var(--ink); }
+    .footer-links { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      margin-top: 2rem;
+    }
+
+    .manage-launcher {
+      position: fixed;
+      right: max(1.25rem, env(safe-area-inset-right));
+      bottom: max(1.25rem, env(safe-area-inset-bottom));
+      z-index: 90;
+    }
+    .manage-header, .manage-actions, .manage-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    [hidden] { display: none !important; }
+    @keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes panel-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes page-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-backdrop.open.dialog-enter { animation: backdrop-in 160ms ease-out; }
+    .modal-backdrop.open .modal-content { animation: panel-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .manage-page:not([hidden]), .import-panel:not([hidden]) { animation: page-in 180ms ease-out; }
+    .manage-row { transition: background-color 180ms ease; }
+    .manage-row:hover { background-color: var(--accent-fill); }
+    .card-tag, .search-input, .form-group input, .form-group select, .form-group textarea {
+      transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    .icon-picker { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.65rem; border: 0; padding: 0; margin-bottom: 1rem; }
+    .icon-picker legend { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .icon-option { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; min-height: 70px; border: 1.5px solid var(--border-ink); border-radius: 10px; background: var(--bg); cursor: pointer; transition: background-color 160ms ease, border-color 160ms ease; }
+    .icon-option:has(input:checked) { background: var(--accent-fill); border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--shadow-ink); }
+    .icon-option:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 4px; }
+    .icon-option span { font-size: 0.78rem; }
+    .icon-option svg { flex-shrink: 0; }
+    .backup-block { padding: 1rem; border: 1.5px solid var(--border-ink); border-radius: 12px; margin-bottom: 1rem; }
+    .backup-block h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .backup-block .manage-note { margin-bottom: 0.9rem; }
+    .import-methods { display: flex; flex-wrap: wrap; gap: 0.6rem; border: 0; margin: 1rem 0; }
+    .import-choice { display: flex; align-items: center; gap: 0.45rem; padding: 0.5rem 0.8rem; background: var(--bg); border: 1.5px solid var(--border-ink); border-radius: 8px; cursor: pointer; }
+    .import-choice:has(input:checked) { background: var(--accent-fill); border-color: var(--ink); }
+    .import-choice input { accent-color: var(--ink); }
+    .import-choice:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 4px; }
+    .language-picker { position: relative; }
+    .language-picker::after {
+      content: "";
+      position: absolute;
+      right: 1.1rem;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+    }
+    .form-group #language-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--card-bg);
+      border: 2px solid var(--border-ink);
+      border-radius: 190px 15px 185px 15px / 15px 185px 15px 195px;
+      box-shadow: 3px 3px 0 var(--shadow-ink);
+      padding: 0.5rem 2.8rem 0.5rem 0.9rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 140ms ease, box-shadow 140ms ease;
+    }
+    .form-group #language-select:hover {
+      background: var(--accent-fill);
+      box-shadow: 4px 4px 0 var(--shadow-ink);
+    }
+    .form-group #language-select:focus {
+      background: var(--accent-fill);
+      outline: none;
+    }
+    #language-select option { background: var(--card-bg); color: var(--ink); }
+    /* Lift form fields as one surface; keep the select arrow attached. */
+    .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+    .form-group textarea,
+    .form-group select:not(#language-select),
+    .language-picker {
+      transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .form-group .lift-hitbox:hover > input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+      .form-group .lift-hitbox:hover > textarea,
+      .form-group .lift-hitbox:hover > select:not(#language-select) {
+        left: -2px; top: -2px;
+        box-shadow: 5px 5px 0 var(--shadow-ink);
+        background: var(--accent-fill);
+      }
+      .lift-hitbox:hover > .language-picker { left: -2px; top: -2px; }
+      .lift-hitbox:hover > .language-picker #language-select {
+        box-shadow: 5px 5px 0 var(--shadow-ink);
+        background: var(--accent-fill);
+      }
+    }
+
+
+    /* Keep the automatic theme control independent of the button label width. */
+    #theme-options .theme-controls {
+      display: grid;
+      grid-template-columns: 9.5rem minmax(0, 1fr);
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+    #manual-theme-btn { width: 100%; justify-content: center; white-space: nowrap; }
+    #theme-options .theme-follow {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      gap: 0.6rem;
+      margin: 0;
+      min-height: 44px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #theme-options #follow-system {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      border: 0;
+    }
+    .theme-switch-track {
+      display: inline-block;
+      position: relative;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 25px;
+      background: var(--accent-fill);
+      border: 2px solid var(--border-ink);
+      border-radius: 3px 2px 4px 2px;
+      box-shadow: 2px 2px 0 var(--shadow-ink);
+      transition: transform 140ms ease, box-shadow 140ms ease, background-color 160ms ease;
+    }
+    .theme-switch-track::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 15px;
+      height: 15px;
+      background: var(--card-bg);
+      border: 2px solid var(--border-ink);
+      border-radius: 1px 2px 1px 2px;
+      transition: transform 160ms ease;
+    }
+    #follow-system:checked + .theme-switch-track { background: var(--ink); }
+    #follow-system:checked + .theme-switch-track::before { transform: translateX(19px); }
+    #follow-system:focus-visible + .theme-switch-track {
+      outline: 2px dashed var(--ink);
+      outline-offset: 4px;
+    }
+    @media (max-width: 380px) {
+      #theme-options .theme-controls { grid-template-columns: 9.5rem; }
+    }
+
+    .import-panel { padding-top: 0.4rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    .manage-page { margin-top: 1rem; }
+    .menu-entry { display: flex; width: 100%; justify-content: space-between; margin-bottom: 0.9rem; text-align: left; }
+    .menu-entry span { font-size: 0.8rem; color: var(--ink-muted); }
+    .sort-actions { display: flex; gap: 0.4rem; }
+    .sort-actions button { min-width: 36px; justify-content: center; padding: 0.35rem 0.5rem; }
+    .sketch-btn:disabled { opacity: 0.35; cursor: default; transform: none; box-shadow: none; }
+    .manage-header { justify-content: space-between; margin-bottom: 1rem; }
+    .manage-actions { margin-bottom: 1.4rem; }
+    .manage-section { margin-top: 1.3rem; }
+    .manage-section h3 { margin-bottom: 0.65rem; }
+    .manage-row { padding: 0.7rem 0; border-bottom: 1px dashed var(--border-ink); }
+    .manage-row .row-name { flex: 1; min-width: 120px; overflow-wrap: anywhere; }
+    .category-name { flex: 1; min-width: 100px; }
+    .category-name input { width: 100%; }
+    .manage-note { color: var(--ink-muted); font-size: 0.85rem; }
+    .modal-backdrop { z-index: 100; }
+    .modal-content:focus { outline: none; }
+    body.modal-open { overflow: hidden; }
+    .site-card:focus-visible, .sketch-btn:focus-visible {
+      outline: 2px dashed var(--ink); outline-offset: 5px;
+    }
+
+    /* Shared masking tape material across the page. */
+    :root {
+      --tape-fill: #e7dfcd;
+      --tape-line: #958b76;
+      --tape-edge: polygon(2% 0, 98% 2%, 100% 18%, 97% 35%, 100% 55%, 98% 75%, 100% 100%, 1% 98%, 3% 80%, 0 58%, 3% 36%, 0 15%);
+    }
+    [data-theme="chalk"] { --tape-fill: #34312b; --tape-line: #777064; }
+    .hero-tape, .paper-tape, .doodle-pad-section::before {
+      background: var(--tape-fill) !important;
+      background-image: none !important;
+      border: 1px solid var(--tape-line) !important;
+      clip-path: var(--tape-edge) !important;
+      opacity: 0.88 !important;
+      pointer-events: none;
+    }
+
+    /* Loose paper layout: stable variations with room for tape and shadows. */
+    .sites-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      column-gap: 1.65rem;
+      row-gap: 2rem;
+      padding: 0.9rem 0.45rem 0.5rem;
+    }
+    .site-card {
+      width: calc((100% - 3.3rem) / 3 - var(--paper-trim));
+      margin-top: var(--paper-drop);
+      margin-left: var(--paper-inset);
+      margin-right: calc(var(--paper-trim) - var(--paper-inset));
+      min-height: var(--paper-height);
+      padding-top: 1.6rem;
+      flex: 0 0 auto;
+      transform: rotate(var(--paper-angle));
+      overflow-wrap: anywhere;
+    }
+    .site-card:hover, .site-card:nth-child(even):hover {
+      transform: translate(-2px, -4px) rotate(var(--paper-angle));
+    }
+    .paper-tape {
+      position: absolute;
+      top: -11px;
+      left: var(--tape-left);
+      width: var(--tape-width);
+      height: 23px;
+      transform: translateX(-50%) rotate(var(--tape-angle));
+      background: var(--tape-fill);
+      border: 1px solid var(--border-ink);
+      opacity: 0.86;
+      pointer-events: none;
+      clip-path: polygon(2% 0, 98% 2%, 100% 18%, 97% 35%, 100% 55%, 98% 75%, 100% 100%, 1% 98%, 3% 80%, 0 58%, 3% 36%, 0 15%);
+    }
+    .doodle-pad-section { position: relative; }
+    .doodle-pad-section::before {
+      content: ""; position: absolute; width: 88px; height: 23px; left: 50%; top: -12px;
+      background: var(--accent-fill); border: 1px solid var(--border-ink);
+      transform: translateX(-50%) rotate(-2deg); opacity: 0.9; pointer-events: none;
+    }
+    @media (max-width: 850px) {
+      .site-card { width: calc((100% - 1.65rem) / 2 - var(--paper-trim)); }
+    }
+    @media (max-width: 540px) {
+      .sites-grid { row-gap: 1.7rem; }
+      .site-card {
+        width: calc(100% - var(--paper-trim));
+        margin-top: 3px;
+        transform: rotate(var(--paper-mobile-angle));
+      }
+      .site-card:hover, .site-card:nth-child(even):hover {
+        transform: translateY(-2px) rotate(var(--paper-mobile-angle));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .hero-doodle {
+        display: none;
+      }
+    }
+  
+    /* Paper controls, with stable borders for selected options. */
+    .import-choice, .icon-option {
+      background: var(--card-bg);
+      color: var(--ink);
+      border: 2px solid var(--border-ink);
+      border-radius: 190px 15px 185px 15px / 15px 185px 15px 195px;
+      box-shadow: 3px 3px 0 var(--shadow-ink);
+      font-weight: 700;
+      transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+    }
+    .import-choice:has(input:checked), .icon-option:has(input:checked) {
+      background: var(--accent-fill);
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--shadow-ink), inset 0 0 0 1px var(--ink);
+    }
+    .import-choice input {
+      appearance: none;
+      -webkit-appearance: none;
+      flex: 0 0 14px;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--border-ink);
+      border-radius: 2px 3px 2px 1px;
+      background: var(--card-bg);
+    }
+    .import-choice input:checked {
+      background: var(--ink);
+      box-shadow: inset 0 0 0 2px var(--card-bg);
+    }
+    .icon-option { padding: 0.55rem 0.3rem; }
+    .search-wrapper { transition: transform 140ms ease; }
+    .search-input { transition: box-shadow 140ms ease, background-color 140ms ease; }
+    .clear-search:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    @media (hover: hover) and (pointer: fine) {
+      .lift-hitbox:hover > .import-choice, .lift-hitbox:hover > .icon-option {
+        left: -2px; top: -2px;
+        box-shadow: 5px 5px 0 var(--shadow-ink);
+        background: var(--accent-fill);
+      }
+      .import-choice:has(input:checked):hover, .icon-option:has(input:checked):hover {
+        box-shadow: 5px 5px 0 var(--shadow-ink), inset 0 0 0 1px var(--ink);
+      }
+      .lift-hitbox:hover > .search-wrapper { left: -2px; top: -2px; }
+      .lift-hitbox:hover > .search-wrapper .search-input {
+        background: var(--accent-fill);
+        box-shadow: 5px 5px 0 var(--shadow-ink);
+      }
+    }
+    #site-manager { padding-top: 0.6rem; }
+    #site-manager .manage-row {
+      position: relative;
+      padding: 1rem 0.8rem 0.85rem;
+      margin-bottom: 1.1rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-ink);
+      border-radius: 190px 15px 185px 15px / 15px 185px 15px 195px;
+      box-shadow: 3px 3px 0 var(--shadow-ink);
+    }
+    #site-manager .manage-row::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 1rem;
+      width: 42px;
+      height: 14px;
+      background: var(--tape-fill);
+      border: 1px solid var(--tape-line);
+      transform: rotate(-4deg);
+      clip-path: polygon(3% 0, 100% 3%, 97% 35%, 100% 70%, 97% 100%, 0 97%, 3% 65%, 0 30%);
+      pointer-events: none;
+    }
+    #site-manager .manage-row:nth-child(even)::before { left: 1.8rem; transform: rotate(3deg); }
+    #site-manager .row-name { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
+    .manager-tag {
+      display: inline-block;
+      max-width: 100%;
+      padding: 0.1rem 0.5rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      background: var(--accent-fill);
+      border: 1.5px solid var(--border-ink);
+      border-radius: 4px 7px 3px 6px;
+      box-shadow: 1px 1px 0 var(--shadow-ink);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .theme-follow:hover .theme-switch-track {
+        left: -2px; top: -2px;
+        box-shadow: 4px 4px 0 var(--shadow-ink);
+      }
+      .theme-follow:active .theme-switch-track {
+        left: 1px; top: 1px;
+        box-shadow: 1px 1px 0 var(--shadow-ink);
+      }
+    }
+    /* Long buttons lift without rotating around their distant edges. */
+    .lift-hitbox:hover > .sketch-btn.menu-entry,
+    .lift-hitbox:hover > #manage-back,
+    #manage-settings .manage-actions .lift-hitbox:hover > .sketch-btn,
+    #manage-backup .lift-hitbox:hover > .sketch-btn,
+    .lift-hitbox:hover > #manual-theme-btn,
+    .lift-hitbox:hover > #reset-settings-btn,
+    .search-empty .lift-hitbox:hover > .sketch-btn {
+      left: -2px; top: -2px;
+    }
+    .sketch-btn.menu-entry:active,
+    #manage-back:active,
+    #manage-settings .manage-actions .sketch-btn:active,
+    #manage-backup .sketch-btn:active,
+    #manual-theme-btn:active,
+    #reset-settings-btn:active,
+    .search-empty .sketch-btn:active {
+      left: 2px; top: 2px;
+    }
+    #manual-theme-btn:disabled { transform: none; }
+
+    /* A stationary layout box owns hover while its child moves inside it. */
+    .lift-hitbox { display: inline-grid; vertical-align: middle; min-width: 0; }
+    .lift-hitbox:has(> button, > .import-choice, > .icon-option, > select, > .language-picker) { cursor: pointer; }
+    .lift-hitbox:has(> input, > textarea, > .search-wrapper) { cursor: text; }
+    .lift-hitbox:has(> [style*="display:none"], > [style*="display: none"]) { display: none; }
+    .lift-hitbox.block-lift { display: block; width: 100%; }
+    .lift-hitbox.menu-lift { display: block; width: 100%; margin-bottom: 0.9rem; }
+    .menu-lift > .menu-entry { margin-bottom: 0; }
+    .lift-hitbox.search-lift { display: block; position: relative; flex: 1; min-width: 220px; max-width: 360px; }
+    .search-lift > .search-wrapper { min-width: 0; max-width: none; width: 100%; }
+    .lift-hitbox.panel-lift { display: block; margin-bottom: 2.2rem; }
+    .lift-hitbox.pad-lift { margin-bottom: 2rem; }
+    .panel-lift > .hero, .panel-lift > .doodle-pad-section { margin-bottom: 0; }
+    .lift-hitbox.option-lift { display: grid; }
+    .lift-hitbox:has(> [hidden]) { display: none; }
+    .lift-hitbox:hover > .sketch-btn:disabled { transform: none; box-shadow: none; }
+    .theme-controls > .lift-hitbox { width: 100%; }
+    #category-filters .lift-hitbox:hover > .sketch-btn.active {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    /* Keep shadow offset synchronized with the whole-pixel lift. */
+    .sketch-btn, .import-choice, .icon-option, .search-input, .search-wrapper,
+    .language-picker, .form-group #language-select,
+    .hero, .doodle-pad-section, .theme-switch-track,
+    .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+    .form-group textarea, .form-group select:not(#language-select) {
+      transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+    }
+    .lift-hitbox:hover > .sketch-btn:active {
+      left: 2px;
+      top: 2px;
+      box-shadow: 1px 1px 0 var(--shadow-ink);
+    }
+    .lift-hitbox:hover > .sketch-btn:disabled {
+      left: 0;
+      top: 0;
+      box-shadow: none;
+    }
+
+    .modal-backdrop.open .modal-content,
+    .manage-page:not([hidden]), .import-panel:not([hidden]) { animation: none; }
+
+    /* One continuous easing curve for every hover surface. */
+    :root { --hover-speed: 140ms; }
+    .sketch-btn, .site-card, .import-choice, .icon-option,
+    .hero, .doodle-pad-section, .theme-switch-track,
+    .search-wrapper, .search-input, .language-picker,
+    .form-group #language-select,
+    .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+    .form-group textarea, .form-group select:not(#language-select) {
+      transition: left var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1),
+                  top var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1),
+                  transform var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1),
+                  box-shadow var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1),
+                  background-color var(--hover-speed) ease,
+                  color var(--hover-speed) ease,
+                  border-color var(--hover-speed) ease;
+    }
+    .theme-switch-track::before { transition: transform var(--hover-speed) ease; }
+    .manage-row, .card-tag { transition: background-color var(--hover-speed) ease; }
+
+    /* Match shadow compensation to each card's actual hover displacement. */
+    .site-card:hover, .site-card:nth-child(even):hover {
+      box-shadow: 6px 8px 0 var(--shadow-ink);
+    }
+    @media (max-width: 540px) {
+      .site-card:hover, .site-card:nth-child(even):hover {
+        box-shadow: 4px 6px 0 var(--shadow-ink);
+      }
+    }
+
+    #manage-categories .manage-row { border-bottom: 0; }
+    #manage-categories .manage-row:hover { background-color: transparent; }
+
+    #site-manager .lift-hitbox.website-row-lift { display: block; width: 100%; margin-bottom: 1.1rem; }
+    #site-manager .website-row-lift > .manage-row {
+      margin-bottom: 0;
+      left: 0;
+      top: 0;
+      transition: left var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1),
+                  top var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1),
+                  box-shadow var(--hover-speed) cubic-bezier(0.2, 0.7, 0.3, 1);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      #site-manager .website-row-lift:hover > .manage-row {
+        left: -2px;
+        top: -2px;
+        box-shadow: 5px 5px 0 var(--shadow-ink);
+      }
+    }
+    .backup-block {
+      background: var(--card-bg);
+      border: 2.5px solid var(--border-ink);
+      border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      box-shadow: 4px 4px 0 var(--shadow-ink);
+    }
+    .backup-block:nth-of-type(even) {
+      border-radius: 15px 235px 15px 245px / 245px 15px 225px 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="status-badge">
+        <span>✎</span>
+        <span id="site-count-label">已收录 4 个站点槽位</span>
+      </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <header class="hero sketch-box">
+      <div class="hero-tape"></div>
+      <div>
+        <h1 class="hero-title">
+          <span id="owner-title">My Sketchbook Portal</span>
+        </h1>
+        <!-- Hand-drawn squiggly underline SVG -->
+        <svg class="scribble-underline" viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 9.5C38 3.5 72 13.5 110 6.5C148 -0.5 182 12.5 217 5.5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <p class="hero-bio" id="owner-bio">
+          A collection of websites I build and experiment with. Click a card to visit a website, or use the manager in the bottom-right corner to organize websites and categories.
+        </p>
+
+      </div>
+
+      <!-- Minimalist Black & White Doodle SVG Illustration -->
+      <svg class="hero-doodle" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Monitor frame -->
+        <path d="M22 28C48 25 94 26 118 29C121 52 120 78 117 96C89 99 47 98 21 95C19 72 20 49 22 28Z" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Inner screen -->
+        <path d="M30 36C54 34 88 35 110 37C111 55 110 72 108 87C84 89 52 88 30 86C28 69 29 52 30 36Z" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+        <!-- Doodle smiley face on screen -->
+        <circle cx="56" cy="56" r="3" fill="currentColor"/>
+        <circle cx="84" cy="56" r="3" fill="currentColor"/>
+        <path d="M56 70C63 77 77 77 84 69" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Stand -->
+        <path d="M62 98L58 116M78 98L82 116M44 117C60 115 80 115 96 118" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <!-- Floating doodle stars -->
+        <path d="M12 18L15 10L18 18L26 21L18 24L15 32L12 24L4 21L12 18Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M124 12L126 18M121 15L129 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </header>
+
+    <!-- Filter & Search Bar -->
+    <section class="controls">
+      <div class="filter-group" id="category-filters"></div>
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="20" y1="20" x2="16" y2="16"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-input" aria-label="Search websites" data-i18n-aria-label="搜索站点" autocomplete="off" placeholder="Search title, description, category or URL…" data-i18n-placeholder="搜索名称、简介、分类或网址…" />
+        <button id="clear-search-btn" class="clear-search" type="button" aria-label="Clear search" data-i18n-aria-label="清空搜索" hidden>×</button>
+      </div>
+    </section>
+
+    <p id="search-status" class="manage-note search-status" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+
+    <!-- Cards Grid -->
+    <main class="sites-grid" id="sites-grid"></main>
+
+    <!-- Interactive Scratchpad -->
+    <section class="doodle-pad-section sketch-box-alt">
+      <div class="doodle-pad-header">
+        <strong data-i18n="✎ 随手涂鸦板 (在下方空白处画两笔)">✎ Doodle pad (draw something below)</strong>
+        <button class="sketch-btn" type="button" id="clear-canvas-btn" data-i18n="擦除重画">Clear drawing</button>
+      </div>
+      <canvas id="doodle-canvas" class="doodle-canvas"></canvas>
+    </section>
+
+    <footer id="site-footer"></footer>
+  </div>
+
+  <button class="sketch-btn manage-launcher" id="manage-btn" type="button" aria-haspopup="dialog" aria-controls="manage-modal" data-i18n="⚙ 管理">⚙ Manage</button>
+  <div class="modal-backdrop" id="manage-modal">
+    <div class="modal-content sketch-box" role="dialog" aria-modal="true" aria-labelledby="manage-title" tabindex="-1">
+      <div class="manage-header">
+        <h2 id="manage-title" data-i18n="⚙ 主页管理">⚙ Homepage manager</h2>
+        <button class="sketch-btn" type="button" onclick="closeManagement()" data-i18n="关闭">Close</button>
+      </div>
+      <button class="sketch-btn" id="manage-back" type="button" onclick="showManagementPage('home')" hidden data-i18n="← 返回菜单">← Back to menu</button>
+      <div id="manage-home" class="manage-page">
+        <button class="sketch-btn menu-entry" type="button" onclick="showManagementPage('categories')"><span data-i18n="分类管理">Categories</span> <span data-i18n="添加、修改与排序 →">Add, rename &amp; reorder →</span></button>
+        <button class="sketch-btn menu-entry" type="button" onclick="showManagementPage('sites')"><span data-i18n="站点管理">Websites</span> <span data-i18n="添加、编辑与排序 →">Add, edit &amp; reorder →</span></button>
+        <button class="sketch-btn menu-entry" type="button" onclick="showManagementPage('settings')"><span data-i18n="主页设置">Page settings</span> <span data-i18n="标题、简介与主题 →">Title, bio &amp; theme →</span></button>
+        <button class="sketch-btn menu-entry" type="button" onclick="showManagementPage('backup')"><span data-i18n="配置备份">Backup</span> <span data-i18n="导出配置 →">Export configuration →</span></button>
+      </div>
+      <section id="manage-sites" class="manage-page" hidden>
+        <div class="manage-actions"><button class="sketch-btn" id="add-site-btn" type="button" data-i18n="＋ 添加站点">＋ Add website</button></div>
+        <p class="manage-note" data-i18n="使用 ↑ ↓ 调整站点顺序，首页和分类筛选会按此顺序显示。">Use ↑ ↓ to reorder websites. The homepage and category filters follow this order.</p>
+        <div id="site-manager"></div>
+      </section>
+      <section id="manage-categories" class="manage-page" hidden>
+        <p class="manage-note" data-i18n="使用 ↑ ↓ 排列标签。重命名会同步更新站点；删除分类后，站点归入“未分类”。">Use ↑ ↓ to reorder categories. Renaming updates websites; deleting moves them to Uncategorized.</p>
+        <form id="category-form" class="manage-row">
+          <div class="form-group category-name" style="margin:0">
+            <input id="new-category" aria-label="New category name" data-i18n-aria-label="新分类名称" placeholder="New category name" data-i18n-placeholder="新分类名称" maxlength="40" required />
+          </div>
+          <button class="sketch-btn" type="submit" data-i18n="＋ 添加">＋ Add</button>
+        </form>
+        <div id="category-manager"></div>
+      </section>
+      <section id="manage-settings" class="manage-page" hidden>
+        <div class="form-group">
+          <label for="language-select" data-i18n="界面语言">Interface language</label>
+          <div class="language-picker"><select id="language-select"><option value="en" selected>English</option><option value="zh-CN">Chinese</option></select></div>
+        </div>
+        <div class="manage-actions">
+          <button class="sketch-btn" type="button" onclick="openEditProfileModal()" data-i18n="✎ 标题、图标与简介">✎ Title, icon &amp; bio</button>
+        </div>
+        <div id="theme-options" class="form-group">
+          <p data-i18n="外观模式" style="font-weight:700;margin-bottom:0.5rem">Appearance</p>
+          <div class="theme-controls">
+            <button class="sketch-btn" id="manual-theme-btn" type="button"></button>
+            <label class="theme-follow">
+              <input id="follow-system" type="checkbox" role="switch" />
+              <span class="theme-switch-track" aria-hidden="true"></span>
+              <span data-i18n="跟随系统">Follow system</span>
+            </label>
+          </div>
+        </div>
+        <div style="border-top:1px dashed var(--border-ink);padding-top:1rem;margin-top:1.2rem">
+          <button id="reset-settings-btn" class="sketch-btn" type="button" data-i18n="恢复默认设置">Restore defaults</button>
+          <p class="manage-note" style="margin-top:0.6rem" data-i18n="重置站点、分类、标题、图标、语言和主题。">Reset websites, categories, titles, icons, language and theme.</p>
+        </div>
+      </section>
+      <section id="manage-backup" class="manage-page" hidden>
+        <div class="backup-block">
+          <h3 data-i18n="导出备份">Export backup</h3>
+          <p class="manage-note" data-i18n="保存当前标题、简介、分类、站点及顺序，方便以后恢复。">Save the current title, bio, categories, websites and order for later restoration.</p>
+          <button class="sketch-btn" type="button" onclick="exportConfig()" data-i18n="⇩ 导出配置 JSON">⇩ Export configuration JSON</button>
+        </div>
+        <div class="backup-block">
+          <h3 data-i18n="恢复备份">Restore backup</h3>
+          <p class="manage-note" data-i18n="文件读取并校验后，会请你确认是否替换当前配置。">After reading and validating the backup, you will be asked to confirm replacing the current configuration.</p>
+          <fieldset class="import-methods">
+            <legend class="sr-only" data-i18n="导入来源">Import source</legend>
+            <label class="import-choice">
+              <input type="radio" name="import-method" value="file" checked />
+              <span data-i18n="本地文件">Local file</span>
+            </label>
+            <label class="import-choice">
+              <input type="radio" name="import-method" value="url" />
+              <span data-i18n="URL 链接">URL link</span>
+            </label>
+          </fieldset>
+          <div id="import-file-panel" class="import-panel">
+            <p class="manage-note" data-i18n="选择之前导出的 JSON 文件（最大 2 MB）。">Choose a previously exported JSON file (up to 2 MB).</p>
+            <button class="sketch-btn" type="button" onclick="document.getElementById('import-config').click()" data-i18n="选择 JSON 文件">Choose JSON file</button>
+            <input type="file" id="import-config" accept=".json,application/json" hidden />
+          </div>
+          <div id="import-url-panel" class="import-panel" hidden>
+            <form id="import-url-form">
+              <div class="form-group">
+                <label for="import-url" data-i18n="配置 JSON 链接">Configuration JSON URL</label>
+                <input id="import-url" type="url" placeholder="https://example.com/my-homepage-config.json" required />
+              </div>
+              <p class="manage-note" data-i18n="填写可直接访问的 JSON 链接；跨站链接需要允许跨域访问（CORS）。">Use a direct JSON URL. Cross-origin links must allow CORS.</p>
+              <button id="import-url-btn" class="sketch-btn" type="submit" data-i18n="读取链接并导入">Read URL &amp; import</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Add / Manage Site Modal -->
+  <div class="modal-backdrop" id="site-modal">
+    <div class="modal-content sketch-box">
+      <h2 style="margin-bottom: 1rem;" data-i18n="✎ 添加或编辑站点卡片">✎ Add or edit a website</h2>
+      <form id="site-form">
+        <input type="hidden" id="site-index" value="-1" />
+        <div class="form-group">
+          <label for="site-title" data-i18n="站点名称">Website name</label>
+          <input type="text" id="site-title" required placeholder="e.g. My blog / Home NAS dashboard" data-i18n-placeholder="例如：我的个人博客 / 家庭 NAS 面板" />
+        </div>
+        <div class="form-group">
+          <label for="site-url" data-i18n="站点地址 (URL)">Website address (URL)</label>
+          <input type="url" id="site-url" required placeholder="https://" />
+        </div>
+        <div class="form-group">
+          <label for="site-cat" data-i18n="分类标签">Category</label>
+          <select id="site-cat"></select>
+        </div>
+        <fieldset class="icon-picker" id="site-icon-picker">
+          <legend data-i18n="卡片图标">Card icon</legend>
+          <div id="site-icon-options" style="display:contents"></div>
+        </fieldset>
+        <div class="form-group">
+          <label for="site-desc" data-i18n="一句话简介">Short description</label>
+          <textarea id="site-desc" rows="2" placeholder="Briefly describe this website..." data-i18n-placeholder="简单描述这个站点的功能或用途..."></textarea>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:0.5rem; margin-top:1.2rem;">
+          <button type="button" class="sketch-btn" id="delete-site-btn" style="display:none;" data-i18n="删除站点">Delete website</button>
+          <div style="display:flex; gap:0.5rem; margin-left:auto;">
+            <button type="button" class="sketch-btn" onclick="closeSiteModal()" data-i18n="取消">Cancel</button>
+            <button type="submit" class="sketch-btn active" data-i18n="保存站点">Save website</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal-backdrop" id="profile-modal">
+    <div class="modal-content sketch-box">
+      <h2 style="margin-bottom: 1rem;" data-i18n="✎ 修改标题、图标与简介">✎ Edit title, icon &amp; bio</h2>
+      <form id="profile-form">
+        <div class="form-group">
+          <label for="input-browser-title" data-i18n="浏览器标签页标题">Browser tab title</label>
+          <input type="text" id="input-browser-title" maxlength="200" placeholder="Leave blank to use the default title" data-i18n-placeholder="留空使用默认标题" />
+          <p class="manage-note" data-i18n="显示在浏览器标签页，与页面主标题独立。">Shown in the browser tab, independently of the homepage heading.</p>
+        </div>
+        <fieldset class="icon-picker">
+          <legend data-i18n="浏览器标签页图标">Browser tab icon</legend>
+          <div id="favicon-options" style="display:contents"></div>
+        </fieldset>
+        <p class="manage-note" data-i18n="与标题一起保存，刷新后保留。">Saved together with the title and retained after refresh.</p>
+        <div class="form-group">
+          <label for="input-owner-title" data-i18n="主页主标题">Homepage title</label>
+          <input type="text" id="input-owner-title" required />
+        </div>
+        <div class="form-group">
+          <label for="input-owner-bio" data-i18n="个人简介 / 欢迎语">Bio / welcome message</label>
+          <textarea id="input-owner-bio" rows="3" required></textarea>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.2rem;">
+          <button type="button" class="sketch-btn" onclick="closeProfileModal()" data-i18n="取消">Cancel</button>
+          <button type="submit" class="sketch-btn active" data-i18n="保存设置">Save settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_SITES = [
+      {
+        title: "Website slot #1",
+        url: "https://example.com",
+        category: "Personal Projects",
+        desc: "A space for your personal project. Add your own website name and link using the manager in the bottom-right corner.",
+        icon: "star"
+      },
+      {
+        title: "Website slot #2",
+        url: "https://example.com",
+        category: "Tools & Services",
+        desc: "A shortcut to your self-hosted tools or services, with quick access and category filters.",
+        icon: "gear"
+      },
+      {
+        title: "Website slot #3",
+        url: "https://example.com",
+        category: "Blog & Notes",
+        desc: "A home for your blog, knowledge base or journal, collecting notes on everyday development and experiments.",
+        icon: "book"
+      },
+      {
+        title: "Website slot #4",
+        url: "https://example.com",
+        category: "Experiments",
+        desc: "A space for frontend demos and creative little projects. Add or remove them anytime.",
+        icon: "spark"
+      }
+    ];
+
+    const ICONS = {
+      star: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`,
+      gear: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
+      book: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`,
+      spark: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>`
+    };
+
+    const iconSVG = paths => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+    ICONS.globe = iconSVG('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/>');
+    ICONS.code = iconSVG('<path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/>');
+    ICONS.home = iconSVG('<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/>');
+    ICONS.heart = iconSVG('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>');
+    const ICON_LABELS = { star: "星星", gear: "齿轮", book: "书本", spark: "闪电", globe: "地球", code: "代码", home: "房屋", heart: "爱心" };
+    function renderIconPicker(selected) {
+      selected = selected || document.querySelector('input[name="site-icon"]:checked')?.value || "star";
+      document.getElementById("site-icon-options").innerHTML = Object.keys(ICONS).map(key =>
+        `<label class="icon-option">
+          <input class="sr-only" type="radio" name="site-icon" value="${key}" ${key === selected ? "checked" : ""} />
+          ${ICONS[key]}<span>${t(ICON_LABELS[key])}</span>
+        </label>`).join("");
+    }
+
+    let sites = JSON.parse(localStorage.getItem("doodle_sites_v1")) || DEFAULT_SITES;
+    let profile = JSON.parse(localStorage.getItem("doodle_profile_v1")) || {
+      title: "My Sketchbook Portal",
+      bio: "A collection of websites I build and experiment with. Click a card to visit a website, or use the manager in the bottom-right corner to organize websites and categories."
+    };
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+    delete profile.footerName;
+    delete profile.githubURL;
+    let categories;
+    try { categories = JSON.parse(localStorage.getItem("doodle_categories_v1")); } catch (_) {}
+    if (!Array.isArray(categories)) categories = ["Tools & Services", "Personal Projects", "Blog & Notes", "Experiments"];
+    categories = [...new Set([...categories, ...sites.map(s => s.category)].filter(c => typeof c === "string" && c && c !== "all"))];
+    let activeCategory = "all";
+    let searchQuery = "";
+
+    const siteMotionIDs = new WeakMap();
+    let nextMotionID = 0;
+    function siteMotionKey(site) {
+      if (!siteMotionIDs.has(site)) siteMotionIDs.set(site, "site-" + (++nextMotionID));
+      return siteMotionIDs.get(site);
+    }
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const activeMotions = new Set();
+    reduceMotion.addEventListener("change", () => {
+      if (reduceMotion.matches) activeMotions.forEach(animation => animation.cancel());
+    });
+    function capturePositions(container) {
+      const positions = new Map();
+      container.querySelectorAll("[data-motion-key]").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.width && rect.height) positions.set(el.dataset.motionKey, rect);
+      });
+      return positions;
+    }
+    function animatePositions(container, positions) {
+      if (reduceMotion.matches || container.id === "category-filters") return;
+      container.querySelectorAll("[data-motion-key]").forEach(el => {
+        if (typeof el.animate !== "function") return;
+        const current = el.getBoundingClientRect();
+        if (!current.width || !current.height) return;
+        const previous = positions.get(el.dataset.motionKey);
+        const resting = getComputedStyle(el).transform;
+        const base = resting === "none" ? "" : resting;
+        let frames;
+        if (previous) {
+          const x = previous.left - current.left, y = previous.top - current.top;
+          if (Math.abs(x) < 0.5 && Math.abs(y) < 0.5) return;
+          frames = [
+            { transform: `translate(${x}px, ${y}px) ${base}`, opacity: 0.85 },
+            { transform: `translate(0, 0) ${base}`, opacity: 1 }
+          ];
+        } else {
+          frames = [
+            { transform: `translateY(8px) ${base}`, opacity: 0 },
+            { transform: `translateY(0) ${base}`, opacity: 1 }
+          ];
+        }
+        const animation = el.animate(frames, {
+          duration: previous ? 280 : 180, easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+        });
+        activeMotions.add(animation);
+        const release = () => activeMotions.delete(animation);
+        animation.onfinish = release;
+        animation.oncancel = release;
+      });
+    }
+
+    function updateFavicon() {
+      const key = Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star";
+      const svg = ICONS[key].replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+        .replace(/width="22" height="22"/, 'width="32" height="32"')
+        .replace(/currentColor/g, '#444444');
+      document.getElementById("site-favicon").setAttribute("href", "data:image/svg+xml," + encodeURIComponent(svg));
+    }
+    function renderFaviconPicker(selected) {
+      selected = selected || (Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star");
+      document.getElementById("favicon-options").innerHTML = Object.keys(ICONS).map(key =>
+        `<label class="icon-option">
+          <input class="sr-only" type="radio" name="favicon-icon" value="${key}" ${key === selected ? "checked" : ""} />
+          ${ICONS[key]}<span>${t(ICON_LABELS[key])}</span>
+        </label>`).join("");
+    }
+    document.getElementById("favicon-options").addEventListener("change", e => {
+      if (e.target.name !== "favicon-icon" || !Object.hasOwn(ICONS, e.target.value)) return;
+      // The checked radio is saved with the other profile fields.
+    });
+
+    function updateBrowserTitle() {
+      document.title = profile.browserTitle?.trim() ||
+        (language === "en" ? "My Doodle Space | Personal Portal" : "My Doodle Space | 个人导航主页");
+    }
+    function renderFooter() {
+      document.getElementById("site-footer").innerHTML = `<p class="footer-links">
+        <span>© ${new Date().getFullYear()} ZeroReiNull</span>
+        <span aria-hidden="true">·</span><a href="https://github.com/ZeroReiNull" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <span aria-hidden="true">·</span><a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">MIT License ↗</a>
+      </p>`;
+    }
+
+    function renderProfile() {
+      renderFooter();
+      updateFavicon();
+      updateBrowserTitle();
+      document.getElementById("owner-title").textContent = profile.title;
+      document.getElementById("owner-bio").textContent = profile.bio;
+    }
+
+    function normalizeSearch(value) {
+      return String(value ?? "").normalize("NFKC").normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+    }
+    function matchesSearch(site, tokens) {
+      let decodedURL = site.url || "";
+      try { decodedURL = decodeURIComponent(decodedURL); } catch (_) {}
+      const fields = [site.title, site.desc, site.category || t("未分类"), site.url, decodedURL]
+        .map(normalizeSearch);
+      return tokens.every(token => fields.some(field => field.includes(token)));
+    }
+
+    function paperDetails(site) {
+      let seed = 2166136261;
+      for (const char of site.url + "|" + site.title) seed = Math.imul(seed ^ char.charCodeAt(0), 16777619) >>> 0;
+      function random() {
+        seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+        return seed / 4294967296;
+      }
+      const angle = (random() * 2 - 1).toFixed(2);
+      const trim = 6 + random() * 16;
+      const inset = random() * trim;
+      const drop = (random() * 27).toFixed(1);
+      const height = (175 + random() * 38).toFixed(1);
+      const tape = random() < 0.72;
+      const left = (28 + random() * 43).toFixed(1);
+      const width = (58 + random() * 27).toFixed(1);
+      const tapeAngle = (random() * 17 - 8.5).toFixed(1);
+      return { tape, style: `--paper-angle:${angle}deg;--paper-mobile-angle:${Number(angle) * 0.3}deg;--paper-trim:${trim.toFixed(1)}px;--paper-inset:${inset.toFixed(1)}px;--paper-drop:${drop}px;--paper-height:${height}px;--tape-left:${left}%;--tape-width:${width}px;--tape-angle:${tapeAngle}deg` };
+    }
+
+    function renderSites() {
+      const grid = document.getElementById("sites-grid");
+      const positions = capturePositions(grid);
+      const countLabel = document.getElementById("site-count-label");
+      countLabel.textContent = language === "en" ? `${sites.length} websites saved` : `已收录 ${sites.length} 个站点`;
+
+      const tokens = normalizeSearch(searchQuery).split(" ").filter(Boolean);
+      const filtered = sites
+        .map((item, idx) => ({ ...item, idx, motionKey: siteMotionKey(item) }))
+        .filter(item => {
+          const matchCat = activeCategory === "all" || item.category === activeCategory;
+          const matchSearch = matchesSearch(item, tokens);
+          return matchCat && matchSearch;
+        });
+
+      document.getElementById("clear-search-btn").hidden = !searchQuery;
+      const status = document.getElementById("search-status");
+      status.hidden = !tokens.length && activeCategory === "all";
+      status.textContent = language === "en"
+        ? `${filtered.length} of ${sites.length} websites`
+        : `找到 ${filtered.length} / ${sites.length} 个站点`;
+      grid.innerHTML = filtered.map((site, i) => {
+        const boxClass = i % 2 === 0 ? "sketch-box" : "sketch-box-alt";
+        const iconSvg = ICONS[site.icon] || ICONS.star;
+        const paper = paperDetails(site);
+        return `
+          <a data-motion-key="${site.motionKey}" style="${paper.style}" class="site-card ${boxClass}" href="${escapeHTML(site.url)}" target="_blank" rel="noopener noreferrer">
+            ${paper.tape ? '<span class="paper-tape" aria-hidden="true"></span>' : ""}
+            <div>
+              <div class="card-top">
+                <div class="card-icon">${iconSvg}</div>
+                <div style="display:flex; gap:0.4rem; align-items:center;">
+                  <span class="card-tag">${escapeHTML(site.category || t("未分类"))}</span>
+                </div>
+              </div>
+              <h3 class="card-title">${escapeHTML(site.title)}</h3>
+              <p class="card-desc">${escapeHTML(site.desc)}</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-url">${escapeHTML(site.url)}</span>
+              <span>${t("访问 ↗")}</span>
+            </div>
+          </a>
+        `;
+      }).join("");
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="search-empty sketch-box">
+          <strong>${t("没有找到匹配的站点")}</strong>
+          <p class="manage-note">${t("试试更少的关键词，或清除筛选。")}</p>
+          <button class="sketch-btn" type="button" onclick="resetSearchFilters()">${t("清除搜索和分类筛选")}</button>
+        </div>`;
+      }
+      animatePositions(grid, positions);
+    }
+
+    function renderCategories() {
+      const filterContainer = document.getElementById("category-filters");
+      const filterPositions = capturePositions(filterContainer);
+      const filters = [{ value: "all", label: t("全部") },
+        ...categories.map(c => ({ value: c, label: c }))];
+      if (sites.some(s => !s.category)) filters.push({ value: "", label: t("未分类") });
+      document.getElementById("category-filters").innerHTML = filters.map(c =>
+        `<button class="sketch-btn ${activeCategory === c.value ? "active" : ""}" data-motion-key="category-${escapeHTML(c.value)}" data-cat="${escapeHTML(c.value)}" type="button">${escapeHTML(c.label)}</button>`
+      ).join("");
+      animatePositions(filterContainer, filterPositions);
+      const select = document.getElementById("site-cat");
+      const selected = select.value;
+      select.innerHTML = `<option value="">${t("未分类")}</option>` + categories.map(c =>
+        `<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");
+      select.value = categories.includes(selected) ? selected : "";
+    }
+
+    function renderManagement() {
+      const categoryContainer = document.getElementById("category-manager");
+      const siteContainer = document.getElementById("site-manager");
+      const categoryPositions = capturePositions(categoryContainer);
+      const sitePositions = capturePositions(siteContainer);
+      document.getElementById("category-manager").innerHTML = categories.map((c, i) =>
+        `<div class="manage-row" data-motion-key="category-${escapeHTML(c)}">
+          <div class="form-group category-name" style="margin:0"><input id="category-name-${i}" value="${escapeHTML(c)}" aria-label="${t('分类名称')}" maxlength="40" /></div>
+          <div class="sort-actions">
+            <button class="sketch-btn" type="button" onclick="moveCategory(${i}, -1)" aria-label="${t('上移分类')}" ${i === 0 ? "disabled" : ""}>↑</button>
+            <button class="sketch-btn" type="button" onclick="moveCategory(${i}, 1)" aria-label="${t('下移分类')}" ${i === categories.length - 1 ? "disabled" : ""}>↓</button>
+          </div>
+          <button class="sketch-btn" type="button" onclick="renameCategory(${i})">${t("保存")}</button>
+          <button class="sketch-btn" type="button" onclick="deleteCategory(${i})">${t("删除")}</button>
+        </div>`).join("");
+      document.getElementById("site-manager").innerHTML = sites.map((site, i) =>
+        `<div class="manage-row" data-motion-key="${siteMotionKey(site)}"><span class="row-name">${escapeHTML(site.title)} <small class="manager-tag">${escapeHTML(site.category || t("未分类"))}</small></span>
+          <div class="sort-actions">
+            <button class="sketch-btn" type="button" onclick="moveSite(${i}, -1)" aria-label="${t('上移网页')}" ${i === 0 ? "disabled" : ""}>↑</button>
+            <button class="sketch-btn" type="button" onclick="moveSite(${i}, 1)" aria-label="${t('下移网页')}" ${i === sites.length - 1 ? "disabled" : ""}>↓</button>
+          </div>
+          <button class="sketch-btn" type="button" onclick="openEditSiteModal(${i})">${t("✎ 编辑")}</button></div>`
+      ).join("") || `<p class="manage-note">${t("还没有站点，点击上方“添加站点”。")}</p>`;
+      animatePositions(categoryContainer, categoryPositions);
+      animatePositions(siteContainer, sitePositions);
+    }
+
+    function moveItem(items, index, direction) {
+      const target = index + direction;
+      if (!Number.isInteger(index) || ![-1, 1].includes(direction) ||
+          index < 0 || target < 0 || index >= items.length || target >= items.length) return false;
+      [items[index], items[target]] = [items[target], items[index]];
+      return true;
+    }
+    window.moveCategory = function(index, direction) {
+      const drafts = new Map(categories.map((c, i) => [c, document.getElementById("category-name-" + i).value]));
+      if (!moveItem(categories, index, direction)) return;
+      saveCategories();
+      categories.forEach((c, i) => { document.getElementById("category-name-" + i).value = drafts.get(c); });
+      document.querySelectorAll("#category-manager .manage-row")[index + direction]
+        ?.querySelector(direction === -1 ? `[aria-label="${t('上移分类')}"]` : `[aria-label="${t('下移分类')}"]`)?.focus();
+    };
+    window.moveSite = function(index, direction) {
+      if (!moveItem(sites, index, direction)) return;
+      localStorage.setItem("doodle_sites_v1", JSON.stringify(sites));
+      renderSites();
+      renderManagement();
+      document.querySelectorAll("#site-manager .manage-row")[index + direction]
+        ?.querySelector(direction === -1 ? `[aria-label="${t('上移网页')}"]` : `[aria-label="${t('下移网页')}"]`)?.focus();
+    };
+
+    let managementPage = "home";
+    window.showManagementPage = function(page, focus = true) {
+      const titles = { home: "⚙ 主页管理", sites: "站点管理", categories: "分类管理", settings: "主页设置", backup: "配置备份" };
+      if (!Object.hasOwn(titles, page)) return;
+      managementPage = page;
+      Object.keys(titles).forEach(key => { document.getElementById("manage-" + key).hidden = key !== page; });
+      document.getElementById("manage-back").hidden = page === "home";
+      document.getElementById("manage-title").textContent = t(titles[page]);
+      if (focus) document.getElementById("manage-modal").querySelector(".modal-content").focus();
+    };
+
+    function saveCategories() {
+      localStorage.setItem("doodle_categories_v1", JSON.stringify(categories));
+      localStorage.setItem("doodle_sites_v1", JSON.stringify(sites));
+      renderCategories();
+      renderSites();
+      renderManagement();
+    }
+    function validCategory(name, previous) {
+      if (!name || name.length > 40 || ["all", "全部", "未分类", "All", "Uncategorized"].includes(name)) {
+        alert(t("请输入 1–40 个字符的分类名称，不能使用“全部”或“未分类”。")); return false;
+      }
+      if (name !== previous && categories.includes(name)) {
+        alert(t("这个分类已经存在。")); return false;
+      }
+      return true;
+    }
+    document.getElementById("category-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("new-category");
+      const name = input.value.trim();
+      if (!validCategory(name)) return;
+      categories.push(name);
+      input.value = "";
+      saveCategories();
+    });
+    window.renameCategory = function(i) {
+      const old = categories[i];
+      const name = document.getElementById("category-name-" + i).value.trim();
+      if (!validCategory(name, old)) return;
+      categories[i] = name;
+      sites.forEach(s => { if (s.category === old) s.category = name; });
+      if (activeCategory === old) activeCategory = name;
+      saveCategories();
+    };
+    window.deleteCategory = function(i) {
+      const name = categories[i];
+      const count = sites.filter(s => s.category === name).length;
+      const message = language === "en"
+        ? `Delete “${name}”?${count ? " " + count + " websites will move to Uncategorized. They will be kept." : ""}`
+        : `删除“${name}”？${count ? count + " 个站点将移至未分类，站点不会删除。" : ""}`;
+      if (!confirm(message)) return;
+      categories.splice(i, 1);
+      sites.forEach(s => { if (s.category === name) s.category = ""; });
+      if (activeCategory === name) activeCategory = "all";
+      saveCategories();
+    };
+
+    function openDialog(id) {
+      const alreadyOpen = document.querySelector(".modal-backdrop.open");
+      const modal = document.getElementById(id);
+      // Only fade the backdrop when entering from the homepage.
+      // Between dialog levels, keep the backdrop fully opaque.
+      modal.classList.toggle("dialog-enter", !alreadyOpen);
+      document.querySelectorAll(".modal-backdrop").forEach(m => {
+        if (m !== modal) m.classList.remove("open", "dialog-enter");
+      });
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+      const panel = modal.querySelector(".modal-content");
+      panel.setAttribute("role", "dialog");
+      panel.setAttribute("aria-modal", "true");
+      panel.setAttribute("tabindex", "-1");
+      panel.focus();
+    }
+    window.openManagement = function() {
+      renderManagement();
+      showManagementPage(managementPage, false);
+      openDialog("manage-modal");
+    };
+    window.closeManagement = function() {
+      document.getElementById("manage-modal").classList.remove("open");
+      document.body.classList.remove("modal-open");
+      document.getElementById("manage-btn").focus();
+    };
+    document.getElementById("manage-btn").addEventListener("click", () => {
+      managementPage = "home";
+      openManagement();
+    });
+    document.querySelectorAll(".modal-backdrop").forEach(modal => {
+      modal.addEventListener("click", e => {
+        if (e.target !== modal) return;
+        if (modal.id === "manage-modal") closeManagement();
+        else openManagement();
+      });
+    });
+    document.addEventListener("keydown", e => {
+      const modal = document.querySelector(".modal-backdrop.open");
+      if (!modal) return;
+      if (e.key === "Escape") {
+        if (modal.id === "manage-modal") {
+          if (managementPage === "home") closeManagement(); else showManagementPage("home");
+        } else openManagement();
+      }
+      if (e.key === "Tab") {
+        const items = [...modal.querySelectorAll('button, input, select, textarea, [href]')]
+          .filter(el => !el.disabled && el.type !== "hidden" && el.getClientRects().length);
+        const first = items[0], last = items[items.length - 1];
+        if (e.shiftKey && (document.activeElement === first || document.activeElement === modal.querySelector(".modal-content"))) {
+          e.preventDefault(); last?.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || document.activeElement === modal.querySelector(".modal-content"))) {
+          e.preventDefault(); first?.focus();
+        }
+      }
+    });
+
+    function applyLanguage() {
+      document.documentElement.lang = language;
+      updateBrowserTitle();
+      document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+      for (const attr of ["placeholder", "aria-label"]) {
+        document.querySelectorAll("[data-i18n-" + attr + "]").forEach(el => {
+          el.setAttribute(attr, t(el.getAttribute("data-i18n-" + attr)));
+        });
+      }
+      document.getElementById("language-select").value = language;
+      renderIconPicker();
+      renderFaviconPicker(document.querySelector('input[name="favicon-icon"]:checked')?.value);
+      const drafts = new Map(categories.map((c, i) => [c, document.getElementById("category-name-" + i)?.value]));
+      renderCategories();
+      renderSites();
+      renderManagement();
+      categories.forEach((c, i) => {
+        if (drafts.get(c) !== undefined) document.getElementById("category-name-" + i).value = drafts.get(c);
+      });
+      showManagementPage(managementPage, false);
+      applyTheme();
+    }
+    document.getElementById("language-select").addEventListener("change", e => {
+      language = e.target.value === "en" ? "en" : "zh-CN";
+      try { localStorage.setItem("doodle_language_v1", language); } catch (_) {}
+      applyLanguage();
+    });
+
+    // Category filter buttons
+    document.getElementById("category-filters").addEventListener("click", e => {
+      const btn = e.target.closest("button[data-cat]");
+      if (!btn) return;
+      document.querySelectorAll("#category-filters .sketch-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeCategory = btn.dataset.cat;
+      renderSites();
+    });
+
+    // Avoid intermediate searches while a Chinese IME composition is active.
+    const searchInput = document.getElementById("search-input");
+    let composingSearch = false;
+    function updateSearch() {
+      searchQuery = searchInput.value;
+      renderSites();
+    }
+    searchInput.addEventListener("compositionstart", () => { composingSearch = true; });
+    searchInput.addEventListener("compositionend", () => {
+      composingSearch = false;
+      updateSearch();
+    });
+    searchInput.addEventListener("input", () => {
+      if (!composingSearch) updateSearch();
+    });
+    document.getElementById("clear-search-btn").addEventListener("click", () => {
+      searchInput.value = "";
+      updateSearch();
+      searchInput.focus();
+    });
+    searchInput.addEventListener("keydown", e => {
+      if (e.key === "Escape" && !e.isComposing && searchInput.value) {
+        e.preventDefault();
+        searchInput.value = "";
+        updateSearch();
+      }
+    });
+    window.resetSearchFilters = function() {
+      activeCategory = "all";
+      searchInput.value = "";
+      searchQuery = "";
+      renderCategories();
+      renderSites();
+      searchInput.focus();
+    };
+
+    function saveThemeChoice() {
+      try { localStorage.setItem("doodle_theme_v1", themePreference); } catch (_) {}
+      applyTheme();
+      redrawCanvas();
+    }
+    applyTheme();
+    document.getElementById("manual-theme-btn").addEventListener("click", () => {
+      if (themePreference === "system") return;
+      themePreference = themePreference === "dark" ? "light" : "dark";
+      saveThemeChoice();
+    });
+    document.getElementById("follow-system").addEventListener("change", e => {
+      // When leaving automatic mode, keep the current appearance.
+      themePreference = e.target.checked ? "system" : (systemTheme.matches ? "dark" : "light");
+      saveThemeChoice();
+    });
+
+    document.getElementById("reset-settings-btn").addEventListener("click", () => {
+      const message = language === "en"
+        ? "Restore defaults? Your websites, categories and settings will be cleared. Export a backup first if you want to keep them."
+        : "恢复默认设置？当前站点、分类和设置将被清空。需要保留的话，请先导出备份。";
+      if (!confirm(message)) return;
+      const keys = ["doodle_sites_v1", "doodle_categories_v1", "doodle_profile_v1", "doodle_theme_v1", "doodle_language_v1"];
+      const previous = keys.map(key => [key, localStorage.getItem(key)]);
+      try {
+        keys.forEach(key => localStorage.removeItem(key));
+      } catch (error) {
+        previous.forEach(([key, value]) => {
+          try { if (value !== null) localStorage.setItem(key, value); } catch (_) {}
+        });
+        alert(language === "en" ? "Unable to reset settings." : "无法清空设置，请重试。");
+        return;
+      }
+      window.location.reload();
+    });
+
+    // Add / Edit Site Modal
+    const siteModal = document.getElementById("site-modal");
+    document.getElementById("add-site-btn").addEventListener("click", () => {
+      document.getElementById("site-index").value = "-1";
+      document.getElementById("site-title").value = "";
+      document.getElementById("site-url").value = "https://";
+      document.getElementById("site-cat").value = categories[0] || "";
+      document.getElementById("site-desc").value = "";
+      renderIconPicker("star");
+      document.getElementById("delete-site-btn").style.display = "none";
+      openDialog("site-modal");
+    });
+
+    window.openEditSiteModal = function(idx) {
+      managementPage = "sites";
+      const s = sites[idx];
+      document.getElementById("site-index").value = String(idx);
+      document.getElementById("site-title").value = s.title;
+      document.getElementById("site-url").value = s.url;
+      document.getElementById("site-cat").value = s.category;
+      document.getElementById("site-desc").value = s.desc;
+      renderIconPicker(Object.hasOwn(ICONS, s.icon) ? s.icon : "star");
+      document.getElementById("delete-site-btn").style.display = "inline-flex";
+      openDialog("site-modal");
+    };
+
+    window.closeSiteModal = function() {
+      openManagement();
+    };
+
+    document.getElementById("site-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const idx = parseInt(document.getElementById("site-index").value, 10);
+      const newSite = {
+        title: document.getElementById("site-title").value.trim(),
+        url: document.getElementById("site-url").value.trim(),
+        category: document.getElementById("site-cat").value,
+        desc: document.getElementById("site-desc").value.trim(),
+        icon: document.querySelector('input[name="site-icon"]:checked')?.value || "star"
+      };
+      if (idx >= 0) {
+        sites[idx] = newSite;
+      } else {
+        sites.push(newSite);
+      }
+      localStorage.setItem("doodle_sites_v1", JSON.stringify(sites));
+      renderSites();
+      closeSiteModal();
+    });
+
+    document.getElementById("delete-site-btn").addEventListener("click", () => {
+      const idx = parseInt(document.getElementById("site-index").value, 10);
+      if (idx >= 0) {
+        sites.splice(idx, 1);
+        localStorage.setItem("doodle_sites_v1", JSON.stringify(sites));
+        renderSites();
+        closeSiteModal();
+      }
+    });
+
+    // Profile Modal
+    const profileModal = document.getElementById("profile-modal");
+    window.openEditProfileModal = function() {
+      managementPage = "settings";
+      renderFaviconPicker();
+      document.getElementById("input-browser-title").value = profile.browserTitle || "";
+      document.getElementById("input-owner-title").value = profile.title;
+      document.getElementById("input-owner-bio").value = profile.bio;
+      openDialog("profile-modal");
+    };
+    window.closeProfileModal = function() {
+      openManagement();
+    };
+    document.getElementById("profile-form").addEventListener("submit", e => {
+      e.preventDefault();
+      profile.favicon = document.querySelector('input[name="favicon-icon"]:checked')?.value || "star";
+      profile.browserTitle = document.getElementById("input-browser-title").value.trim();
+      profile.title = document.getElementById("input-owner-title").value.trim();
+      profile.bio = document.getElementById("input-owner-bio").value.trim();
+      localStorage.setItem("doodle_profile_v1", JSON.stringify(profile));
+      renderProfile();
+      closeProfileModal();
+    });
+
+    // Export JSON
+    window.exportConfig = function() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ profile, categories, sites }, null, 2));
+      const a = document.createElement("a");
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", "my-homepage-config.json");
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    function normalizeConfig(data) {
+      const fail = () => { throw new Error(language === "en" ? "Invalid configuration format." : "配置格式不正确。"); };
+      if (!data || typeof data !== "object" || !data.profile ||
+          typeof data.profile.title !== "string" || !data.profile.title.trim() ||
+          typeof data.profile.bio !== "string" || !Array.isArray(data.sites)) fail();
+      if (data.profile.browserTitle !== undefined &&
+          (typeof data.profile.browserTitle !== "string" || data.profile.browserTitle.length > 200)) fail();
+      const importedSites = data.sites.map(site => {
+        if (!site || typeof site.title !== "string" || !site.title.trim() ||
+            typeof site.url !== "string" || typeof site.desc !== "string" ||
+            typeof site.category !== "string") fail();
+        let url;
+        try { url = new URL(site.url); } catch (_) { fail(); }
+        if (!["http:", "https:"].includes(url.protocol)) fail();
+        return { title: site.title.trim(), url: url.href, desc: site.desc,
+          category: site.category, icon: Object.hasOwn(ICONS, site.icon) ? site.icon : "star" };
+      });
+      if (data.categories !== undefined && (!Array.isArray(data.categories) ||
+          data.categories.some(c => typeof c !== "string" || !c.trim()))) fail();
+      const importedCategories = [...new Set([
+        ...(data.categories || []), ...importedSites.map(site => site.category).filter(Boolean)
+      ])];
+      if (importedCategories.some(c => c.length > 40 ||
+          ["all", "全部", "未分类", "All", "Uncategorized"].includes(c))) fail();
+      return { profile: { title: data.profile.title.trim(), bio: data.profile.bio, browserTitle: (data.profile.browserTitle || "").trim(), favicon: Object.hasOwn(ICONS, data.profile.favicon) ? data.profile.favicon : "star" },
+        categories: importedCategories, sites: importedSites };
+    }
+    function importConfiguration(imported) {
+        const message = language === "en"
+          ? `Import ${imported.sites.length} websites and ${imported.categories.length} categories? This replaces the current configuration.`
+          : `导入 ${imported.sites.length} 个站点和 ${imported.categories.length} 个分类？将替换当前配置。`;
+        if (!confirm(message)) return;
+        const changes = [
+          ["doodle_profile_v1", imported.profile],
+          ["doodle_categories_v1", imported.categories],
+          ["doodle_sites_v1", imported.sites]
+        ];
+        const previous = changes.map(([key]) => [key, localStorage.getItem(key)]);
+        try {
+          changes.forEach(([key, value]) => localStorage.setItem(key, JSON.stringify(value)));
+        } catch (error) {
+          previous.forEach(([key, value]) => {
+            try { if (value === null) localStorage.removeItem(key); else localStorage.setItem(key, value); } catch (_) {}
+          });
+          throw error;
+        }
+        profile = imported.profile;
+        categories = imported.categories;
+        sites = imported.sites;
+        activeCategory = "all";
+        searchQuery = "";
+        document.getElementById("search-input").value = "";
+        renderProfile();
+        applyLanguage();
+        alert(t("导入成功。"));
+    }
+    document.getElementById("import-config").addEventListener("change", async e => {
+      const input = e.target;
+      const file = input.files[0];
+      if (!file) return;
+      try {
+        if (file.size > 2 * 1024 * 1024) throw new Error(language === "en" ? "File exceeds 2 MB." : "文件不能超过 2 MB。");
+        const imported = normalizeConfig(JSON.parse(await file.text()));
+        importConfiguration(imported);
+      } catch (error) {
+        alert(t("导入失败：") + error.message);
+      } finally {
+        input.value = "";
+      }
+    });
+
+    async function readConfigURL(value) {
+      const url = new URL(value);
+      if (!["https:", "http:"].includes(url.protocol)) throw new Error(t("只支持 HTTP 或 HTTPS 链接。"));
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(url.href, { signal: controller.signal, credentials: "omit" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        const limit = 2 * 1024 * 1024;
+        if (Number(response.headers.get("content-length")) > limit) {
+          await response.body?.cancel();
+          throw new Error(t("文件不能超过 2 MB。"));
+        }
+        let content;
+        if (response.body) {
+          const reader = response.body.getReader();
+          const chunks = [];
+          let size = 0;
+          while (true) {
+            const { done, value: chunk } = await reader.read();
+            if (done) break;
+            size += chunk.byteLength;
+            if (size > limit) {
+              await reader.cancel();
+              throw new Error(t("文件不能超过 2 MB。"));
+            }
+            chunks.push(chunk);
+          }
+          const bytes = new Uint8Array(size);
+          let offset = 0;
+          chunks.forEach(chunk => { bytes.set(chunk, offset); offset += chunk.byteLength; });
+          content = new TextDecoder().decode(bytes);
+        } else {
+          content = await response.text();
+          if (new TextEncoder().encode(content).byteLength > limit) throw new Error(t("文件不能超过 2 MB。"));
+        }
+        return normalizeConfig(JSON.parse(content.replace(/^\uFEFF/, "")));
+      } catch (error) {
+        if (error.name === "AbortError") throw new Error(t("请求超时，请重试。"));
+        if (error instanceof TypeError) throw new Error(t("无法读取链接，请检查地址、网络及跨域权限（CORS）。"));
+        throw error;
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    document.querySelectorAll('input[name="import-method"]').forEach(input => {
+      input.addEventListener("change", () => {
+        document.getElementById("import-file-panel").hidden = input.value !== "file";
+        document.getElementById("import-url-panel").hidden = input.value !== "url";
+      });
+    });
+    let importingURL = false;
+    document.getElementById("import-url-form").addEventListener("submit", async e => {
+      e.preventDefault();
+      if (importingURL) return;
+      importingURL = true;
+      const button = document.getElementById("import-url-btn");
+      button.disabled = true;
+      button.textContent = t("导入中…");
+      try {
+        const config = await readConfigURL(document.getElementById("import-url").value.trim());
+        importConfiguration(config);
+      } catch (error) {
+        alert(t("导入失败：") + error.message);
+      } finally {
+        importingURL = false;
+        button.disabled = false;
+        button.textContent = t("读取链接并导入");
+      }
+    });
+
+    // Keep logical strokes and render at the screen's actual pixel density.
+    const canvas = document.getElementById("doodle-canvas");
+    const ctx = canvas.getContext("2d");
+    const strokes = [];
+    let currentStroke = null;
+    let drawingPointer = null;
+    let canvasWidth = 0, canvasHeight = 0, canvasScale = 1;
+
+    function redrawCanvas() {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(canvasScale, 0, 0, canvasScale, 0, 0);
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--ink").trim();
+      ctx.fillStyle = ctx.strokeStyle;
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      for (const points of strokes) {
+        ctx.beginPath();
+        const first = points[0];
+        if (points.length === 1) {
+          ctx.arc(first.x * canvasWidth, first.y * canvasHeight, 1, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.moveTo(first.x * canvasWidth, first.y * canvasHeight);
+          points.slice(1).forEach(p => ctx.lineTo(p.x * canvasWidth, p.y * canvasHeight));
+          ctx.stroke();
+        }
+      }
+    }
+    function resizeCanvas() {
+      canvasWidth = canvas.clientWidth;
+      canvasHeight = canvas.clientHeight;
+      canvasScale = window.devicePixelRatio || 1;
+      const width = Math.round(canvasWidth * canvasScale);
+      const height = Math.round(canvasHeight * canvasScale);
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+      redrawCanvas();
+    }
+    window.addEventListener("resize", resizeCanvas);
+    if (typeof ResizeObserver !== "undefined") new ResizeObserver(resizeCanvas).observe(canvas);
+    setTimeout(resizeCanvas, 0);
+    systemTheme.addEventListener("change", () => requestAnimationFrame(redrawCanvas));
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (e.clientX - rect.left - canvas.clientLeft) / canvasWidth,
+        y: (e.clientY - rect.top - canvas.clientTop) / canvasHeight
+      };
+    }
+    canvas.addEventListener("pointerdown", e => {
+      if (drawingPointer !== null || (e.pointerType === "mouse" && e.button !== 0)) return;
+      e.preventDefault();
+      resizeCanvas();
+      drawingPointer = e.pointerId;
+      canvas.setPointerCapture(e.pointerId);
+      currentStroke = [getPos(e)];
+      strokes.push(currentStroke);
+      redrawCanvas();
+    });
+    canvas.addEventListener("pointermove", e => {
+      if (e.pointerId !== drawingPointer) return;
+      for (const point of (e.getCoalescedEvents?.().length ? e.getCoalescedEvents() : [e])) {
+        currentStroke.push(getPos(point));
+      }
+      redrawCanvas();
+    });
+    function finishStroke(e) {
+      if (e.pointerId !== drawingPointer) return;
+      drawingPointer = null;
+      currentStroke = null;
+    }
+    canvas.addEventListener("pointerup", finishStroke);
+    canvas.addEventListener("pointercancel", finishStroke);
+    canvas.addEventListener("lostpointercapture", finishStroke);
+    document.getElementById("clear-canvas-btn").addEventListener("click", () => {
+      strokes.length = 0;
+      drawingPointer = null;
+      currentStroke = null;
+      redrawCanvas();
+    });
+
+    renderProfile();
+    applyLanguage();
+  </script>
+
+  <script>
+    // Wrap newly rendered controls too (filters, icon pickers and manager rows).
+    function stabilizeHoverTargets() {
+      const targets = '#site-manager .manage-row, .sketch-btn, .import-choice, .icon-option, .search-wrapper, .language-picker, .hero, .doodle-pad-section, .form-group textarea, .form-group select:not(#language-select), .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"])';
+      document.querySelectorAll(targets).forEach(control => {
+        if (control.parentElement.classList.contains('lift-hitbox')) return;
+        const box = document.createElement('div');
+        box.className = 'lift-hitbox';
+        if (control.matches('#site-manager .manage-row')) box.classList.add('website-row-lift');
+        else if (control.matches('.menu-entry')) box.classList.add('menu-lift');
+        else if (control.matches('.search-wrapper')) box.classList.add('search-lift');
+        else if (control.matches('.hero, .doodle-pad-section')) {
+          box.classList.add('panel-lift');
+          if (control.matches('.doodle-pad-section')) box.classList.add('pad-lift');
+        } else if (control.matches('.icon-option')) box.classList.add('option-lift');
+        else if (control.matches('input, select, textarea, .language-picker')) box.classList.add('block-lift');
+        if (control.classList.contains('manage-launcher')) {
+          control.classList.remove('manage-launcher');
+          box.classList.add('manage-launcher');
+        }
+        box.addEventListener('click', event => {
+          if (event.target !== box) return;
+          if (control.matches('input, select, textarea, .search-wrapper, .language-picker')) {
+            const field = control.matches('input, select, textarea') ? control : control.querySelector('input, select');
+            field?.focus();
+          } else if (control.matches('button, label')) control.click();
+        });
+        control.before(box);
+        box.append(control);
+      });
+    }
+    stabilizeHoverTargets();
+    const hoverLayoutObserver = new MutationObserver(stabilizeHoverTargets);
+    hoverLayoutObserver.observe(document.body, { childList: true, subtree: true });
+  </script>
+</body>
+</html>
