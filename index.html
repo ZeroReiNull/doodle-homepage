@@ -7,6 +7,9 @@
   <link id="site-favicon" rel="icon" type="image/svg+xml" />
   <meta name="color-scheme" content="light dark" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&amp;display=swap" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
   <script>
     let language = "en";
@@ -80,7 +83,7 @@
       background-image: radial-gradient(var(--dot-color) 1.25px, transparent 1.25px);
       background-size: 22px 22px;
       color: var(--ink);
-      font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", "LXGW WenKai Lite", "Kaiti SC", "STKaiti", "KaiTi", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: "Kalam", "Comic Sans MS", "Chalkboard SE", "Marker Felt", "LXGW WenKai Lite", "Kaiti SC", "STKaiti", "KaiTi", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
       min-height: 100vh;
       padding: 2.5rem 1.25rem 4rem;
@@ -978,6 +981,69 @@
     }
     .backup-block:nth-of-type(even) {
       border-radius: 15px 235px 15px 245px / 245px 15px 225px 15px;
+    }
+
+    /* Shadows belong to stationary hit areas, never to the lifted surface. */
+    #category-filters .lift-hitbox { position: relative; }
+    #category-filters .lift-hitbox::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--shadow-ink);
+      border-radius: 220px 18px 200px 18px / 18px 210px 16px 230px;
+      box-shadow: none;
+      transform: translate(3px, 3px);
+      pointer-events: none;
+    }
+    #category-filters .sketch-btn,
+    #category-filters .lift-hitbox:hover > .sketch-btn,
+    #category-filters .lift-hitbox:hover > .sketch-btn:active { box-shadow: none; }
+    .sites-grid > .card-shell {
+      display: grid;
+      position: relative;
+      width: calc((100% - 3.3rem) / 3 - var(--paper-trim));
+      margin-top: var(--paper-drop);
+      margin-left: var(--paper-inset);
+      margin-right: calc(var(--paper-trim) - var(--paper-inset));
+      flex: 0 0 auto;
+    }
+    .card-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--shadow-ink);
+      border-radius: var(--surface-radius);
+      box-shadow: none;
+      transform: translate(4px, 4px) rotate(var(--paper-angle));
+      pointer-events: none;
+    }
+    .card-shell > .site-card,
+    .card-shell > .site-card:hover,
+    .card-shell > .site-card:nth-child(even):hover {
+      width: 100%;
+      margin: 0;
+      box-shadow: none;
+      transform: rotate(var(--paper-angle));
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .card-shell:hover > .site-card,
+      .card-shell:hover > .site-card:nth-child(even) {
+        transform: translate(-2px, -4px) rotate(var(--paper-angle));
+      }
+    }
+    @media (max-width: 850px) {
+      .sites-grid > .card-shell { width: calc((100% - 1.65rem) / 2 - var(--paper-trim)); }
+    }
+    @media (max-width: 540px) {
+      .sites-grid > .card-shell { width: calc(100% - var(--paper-trim)); margin-top: 3px; }
+      .card-shell::before { transform: translate(4px, 4px) rotate(var(--paper-mobile-angle)); }
+      .card-shell > .site-card, .card-shell > .site-card:hover,
+      .card-shell > .site-card:nth-child(even):hover { transform: rotate(var(--paper-mobile-angle)); }
+    }
+    @media (max-width: 540px) and (hover: hover) and (pointer: fine) {
+      .card-shell:hover > .site-card, .card-shell:hover > .site-card:nth-child(even) {
+        transform: translateY(-2px) rotate(var(--paper-mobile-angle));
+      }
     }
   </style>
 </head>
@@ -2092,12 +2158,16 @@
   <script>
     // Wrap newly rendered controls too (filters, icon pickers and manager rows).
     function stabilizeHoverTargets() {
-      const targets = '#site-manager .manage-row, .sketch-btn, .import-choice, .icon-option, .search-wrapper, .language-picker, .hero, .doodle-pad-section, .form-group textarea, .form-group select:not(#language-select), .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"])';
+      const targets = '.site-card, #site-manager .manage-row, .sketch-btn, .import-choice, .icon-option, .search-wrapper, .language-picker, .hero, .doodle-pad-section, .form-group textarea, .form-group select:not(#language-select), .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"])';
       document.querySelectorAll(targets).forEach(control => {
         if (control.parentElement.classList.contains('lift-hitbox')) return;
         const box = document.createElement('div');
         box.className = 'lift-hitbox';
-        if (control.matches('#site-manager .manage-row')) box.classList.add('website-row-lift');
+        if (control.matches('.site-card')) {
+          box.classList.add('card-shell');
+          box.setAttribute('style', control.getAttribute('style') || '');
+          box.style.setProperty('--surface-radius', getComputedStyle(control).borderRadius);
+        } else if (control.matches('#site-manager .manage-row')) box.classList.add('website-row-lift');
         else if (control.matches('.menu-entry')) box.classList.add('menu-lift');
         else if (control.matches('.search-wrapper')) box.classList.add('search-lift');
         else if (control.matches('.hero, .doodle-pad-section')) {
@@ -2114,7 +2184,7 @@
           if (control.matches('input, select, textarea, .search-wrapper, .language-picker')) {
             const field = control.matches('input, select, textarea') ? control : control.querySelector('input, select');
             field?.focus();
-          } else if (control.matches('button, label')) control.click();
+          } else if (control.matches('button, label, a')) control.click();
         });
         control.before(box);
         box.append(control);
