@@ -102,6 +102,10 @@
       "上传自定义图标": "Upload custom icon",
       "图标文件不能超过 5 MB。": "Icon file must not exceed 5 MB.",
       "请选择 PNG、JPEG、WebP 或 ICO 图片。": "Choose a PNG, JPEG, WebP or ICO image.",
+      "裁切图标": "Crop icon",
+      "拖动图片调整位置": "Drag the image to reposition it",
+      "缩放": "Zoom",
+      "使用裁切": "Use crop",
       "清空搜索": "Clear search",
       "没有找到匹配的站点": "No matching websites",
       "试试更少的关键词，或清除筛选。": "Try fewer keywords or clear the filters.",
@@ -659,6 +663,37 @@
 
     .modal-content:focus {
       outline: none;
+    }
+
+    .crop-editor {
+      display: grid;
+      justify-items: center;
+      gap: 1rem;
+    }
+
+    #icon-crop-canvas {
+      display: block;
+      width: min(100%, 320px);
+      aspect-ratio: 1;
+      background: var(--accent-fill);
+      border: 2.5px solid var(--border-ink);
+      border-radius: 34% 38% 32% 40% / 38% 32% 40% 34%;
+      box-shadow: 4px 4px 0 var(--shadow-ink);
+      cursor: grab;
+      touch-action: none;
+    }
+
+    #icon-crop-canvas.dragging {
+      cursor: grabbing;
+    }
+
+    .crop-zoom {
+      width: min(100%, 320px);
+    }
+
+    .crop-zoom input {
+      width: 100%;
+      accent-color: var(--ink);
     }
 
     .form-group {
@@ -1680,6 +1715,25 @@
     </div>
   </div>
 
+  <!-- Icon Cropper Modal -->
+  <div class="modal-backdrop" id="icon-crop-modal">
+    <div class="modal-content sketch-box" role="dialog" aria-modal="true" aria-labelledby="icon-crop-title">
+      <h2 id="icon-crop-title" style="margin-bottom:0.35rem" data-i18n="裁切图标">Crop icon</h2>
+      <p class="manage-note" style="margin-bottom:1rem" data-i18n="拖动图片调整位置">Drag the image to reposition it</p>
+      <div class="crop-editor">
+        <canvas id="icon-crop-canvas" width="320" height="320"></canvas>
+        <label class="crop-zoom" for="icon-crop-zoom">
+          <span data-i18n="缩放">Zoom</span>
+          <input id="icon-crop-zoom" type="range" min="1" max="4" value="1" step="0.01" />
+        </label>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-top:1.2rem">
+        <button id="cancel-icon-crop" class="sketch-btn" type="button" data-i18n="取消">Cancel</button>
+        <button id="apply-icon-crop" class="sketch-btn active" type="button" data-i18n="使用裁切">Use crop</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const DEFAULT_SITES = [
       {
@@ -1760,6 +1814,115 @@
       if (!validCustomIcon(result)) throw new Error(t("请选择 PNG、JPEG、WebP 或 ICO 图片。"));
       return result;
     }
+
+    const cropCanvas = document.getElementById("icon-crop-canvas");
+    const cropContext = cropCanvas.getContext("2d");
+    const cropZoom = document.getElementById("icon-crop-zoom");
+    let cropState = null;
+    let cropReturnModal = "manage-modal";
+    let cropResolve = null;
+
+    function clampCropOffset() {
+      if (!cropState) return;
+      const scale = cropState.baseScale * cropState.zoom;
+      const overflowX = Math.max(0, (cropState.image.naturalWidth * scale - cropCanvas.width) / 2);
+      const overflowY = Math.max(0, (cropState.image.naturalHeight * scale - cropCanvas.height) / 2);
+      cropState.offsetX = Math.max(-overflowX, Math.min(overflowX, cropState.offsetX));
+      cropState.offsetY = Math.max(-overflowY, Math.min(overflowY, cropState.offsetY));
+    }
+
+    function drawIconCrop() {
+      if (!cropState) return;
+      clampCropOffset();
+      const scale = cropState.baseScale * cropState.zoom;
+      const width = cropState.image.naturalWidth * scale;
+      const height = cropState.image.naturalHeight * scale;
+      cropContext.clearRect(0, 0, cropCanvas.width, cropCanvas.height);
+      cropContext.drawImage(
+        cropState.image,
+        (cropCanvas.width - width) / 2 + cropState.offsetX,
+        (cropCanvas.height - height) / 2 + cropState.offsetY,
+        width,
+        height
+      );
+    }
+
+    function openIconCropper(dataURL, returnModal) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => {
+          cropState = {
+            image,
+            zoom: 1,
+            baseScale: Math.max(cropCanvas.width / image.naturalWidth, cropCanvas.height / image.naturalHeight),
+            offsetX: 0,
+            offsetY: 0,
+            pointerId: null,
+            lastX: 0,
+            lastY: 0
+          };
+          cropReturnModal = returnModal;
+          cropResolve = resolve;
+          cropZoom.value = "1";
+          drawIconCrop();
+          openDialog("icon-crop-modal");
+        };
+        image.onerror = () => reject(new Error(t("请选择 PNG、JPEG、WebP 或 ICO 图片。")));
+        image.src = dataURL;
+      });
+    }
+
+    function finishIconCrop(result) {
+      const resolve = cropResolve;
+      cropResolve = null;
+      cropState = null;
+      openDialog(cropReturnModal);
+      resolve?.(result);
+    }
+
+    cropCanvas.addEventListener("pointerdown", e => {
+      if (!cropState || cropState.pointerId !== null) return;
+      cropState.pointerId = e.pointerId;
+      cropState.lastX = e.clientX;
+      cropState.lastY = e.clientY;
+      cropCanvas.setPointerCapture(e.pointerId);
+      cropCanvas.classList.add("dragging");
+    });
+
+    cropCanvas.addEventListener("pointermove", e => {
+      if (!cropState || e.pointerId !== cropState.pointerId) return;
+      const rect = cropCanvas.getBoundingClientRect();
+      const ratio = cropCanvas.width / rect.width;
+      cropState.offsetX += (e.clientX - cropState.lastX) * ratio;
+      cropState.offsetY += (e.clientY - cropState.lastY) * ratio;
+      cropState.lastX = e.clientX;
+      cropState.lastY = e.clientY;
+      drawIconCrop();
+    });
+
+    function stopCropDrag(e) {
+      if (!cropState || e.pointerId !== cropState.pointerId) return;
+      cropState.pointerId = null;
+      cropCanvas.classList.remove("dragging");
+    }
+
+    cropCanvas.addEventListener("pointerup", stopCropDrag);
+    cropCanvas.addEventListener("pointercancel", stopCropDrag);
+    cropZoom.addEventListener("input", () => {
+      if (!cropState) return;
+      cropState.zoom = Number(cropZoom.value);
+      drawIconCrop();
+    });
+    document.getElementById("cancel-icon-crop").addEventListener("click", () => finishIconCrop(null));
+    document.getElementById("apply-icon-crop").addEventListener("click", () => {
+      if (!cropState) return;
+      const output = document.createElement("canvas");
+      output.width = 512;
+      output.height = 512;
+      const context = output.getContext("2d");
+      context.drawImage(cropCanvas, 0, 0, cropCanvas.width, cropCanvas.height, 0, 0, output.width, output.height);
+      finishIconCrop(output.toDataURL("image/png"));
+    });
 
     function renderIconOptions(containerId, inputName, selected) {
       document.getElementById(containerId).innerHTML = Object.keys(ICONS).map(key =>
@@ -2238,6 +2401,7 @@
       modal.addEventListener("click", e => {
         if (e.target !== modal) return;
         if (modal.id === "manage-modal") closeManagement();
+        else if (modal.id === "icon-crop-modal") finishIconCrop(null);
         else openManagement();
       });
     });
@@ -2249,6 +2413,8 @@
         if (modal.id === "manage-modal") {
           if (managementPage === "home") closeManagement();
           else showManagementPage("home");
+        } else if (modal.id === "icon-crop-modal") {
+          finishIconCrop(null);
         } else {
           openManagement();
         }
@@ -2420,7 +2586,11 @@
       const file = input.files[0];
       if (!file) return;
       try {
-        pendingCustomSiteIcon = await readCustomIcon(file);
+        const source = await readCustomIcon(file);
+        input.value = "";
+        const cropped = await openIconCropper(source, "site-modal");
+        if (!cropped) return;
+        pendingCustomSiteIcon = cropped;
         renderIconPicker("custom");
       } catch (error) {
         input.value = "";
@@ -2482,7 +2652,11 @@
       const file = input.files[0];
       if (!file) return;
       try {
-        pendingCustomFavicon = await readCustomIcon(file);
+        const source = await readCustomIcon(file);
+        input.value = "";
+        const cropped = await openIconCropper(source, "profile-modal");
+        if (!cropped) return;
+        pendingCustomFavicon = cropped;
         renderFaviconPicker("custom");
       } catch (error) {
         input.value = "";
