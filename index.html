@@ -2150,14 +2150,25 @@
         return `<img class="custom-icon-preview" src="${site.customIcon}" alt="" />`;
       }
       if (site.icon !== "website") return ICONS[site.icon] || ICONS.star;
-      let favicon = "";
+      let favicons = [];
       try {
         const url = new URL(site.url);
-        if (["http:", "https:"].includes(url.protocol)) favicon = new URL("/favicon.ico", url.origin).href;
+        if (["http:", "https:"].includes(url.protocol)) {
+          favicons = ["/favicon.ico", "/favicon.png", "/favicon.svg", "/apple-touch-icon.png"]
+            .map(path => new URL(path, url.origin).href);
+        }
       } catch (_) {}
-      if (!favicon) return ICONS.globe;
-      return `<img class="website-favicon" src="${escapeHTML(favicon)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />${ICONS.globe}`;
+      if (!favicons.length) return ICONS.globe;
+      return `<img class="website-favicon" src="${escapeHTML(favicons[0])}" data-fallback-srcs="${escapeHTML(favicons.slice(1).join("|"))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="tryNextWebsiteIcon(this)" />${ICONS.globe}`;
     }
+
+    window.tryNextWebsiteIcon = function(image) {
+      const sources = (image.dataset.fallbackSrcs || "").split("|").filter(Boolean);
+      const next = sources.shift();
+      image.dataset.fallbackSrcs = sources.join("|");
+      if (next) image.src = next;
+      else image.hidden = true;
+    };
 
     function renderSites() {
       const grid = document.getElementById("sites-grid");
