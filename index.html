@@ -515,6 +515,7 @@
       background: var(--accent-fill);
       flex-shrink: 0;
       transform: rotate(var(--paper-counter-angle));
+      overflow: hidden;
     }
 
     .card-icon .website-favicon,
@@ -523,6 +524,13 @@
       height: 24px;
       object-fit: contain;
       border-radius: 30%;
+    }
+
+    .card-icon .custom-icon-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
     }
 
     .card-icon .website-favicon + svg {
