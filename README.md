@@ -1,41 +1,40 @@
 # Doodle Homepage
 
-A lightweight personal homepage for organizing the websites, tools, and dashboards you use every day.
+A personal homepage for organizing website shortcuts. It supports categories, search, custom icons, themes, bilingual UI, drawing, and JSON backup.
 
-It is a small static web app with:
+## Branches
 
-- a homepage for favorite links
-- category filtering and search
-- a doodle pad for fun
-- light/dark mode and language switching
-- editable homepage title, bio, favicon, and browser tab title
-- local backup/import/export so your setup survives
+| Branch | Purpose |
+| --- | --- |
+| `refactor/modular-frontend` | Modular source code for development |
+| `main` | Compiled single-file production build |
 
-## Notes
-Everything is stored in the browser using `localStorage`, so your setup persists on the same browser/device unless you clear site data.
+## Develop
 
-## Development
-
-The app is split into focused HTML, CSS, and JavaScript files. You can serve the source directly with any static web server; for example:
+Run the modular source with any static server:
 
 ```bash
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the file map, storage schema, and guidance for common modifications.
+Open `http://127.0.0.1:8000/`. The project has no runtime dependencies. See [ARCHITECTURE.md](ARCHITECTURE.md) for the file map and storage schema.
 
-## Single-file build
+## Build
 
-Run the dependency-free build script to inline all local CSS and JavaScript into one portable HTML file:
+Node.js 18 or newer is required. No package installation is needed.
 
 ```bash
 npm run build
 ```
 
-The result is written to [`dist/index.html`](dist/index.html). External webfont links remain external, while the complete application code and styling are contained in the generated file. Edit the modular source files rather than the generated file.
+This creates [`dist/index.html`](dist/index.html) by inlining all local CSS and JavaScript. Edit the modular source files; do not edit the generated file directly.
 
-The `Build single-file homepage` GitHub Actions workflow runs on every source push and pull request. After a push, it commits an updated `dist/index.html` back to that branch, so the compiled file can be viewed and downloaded directly in GitHub. It also provides a `doodle-homepage-single-file` workflow artifact.
+## Publish
 
-## Production branch
+Push this branch to GitHub. The workflow automatically:
 
-`refactor/modular-frontend` is the modular source branch. After that branch builds successfully, the workflow publishes the compiled file to `main/index.html`. This keeps `main` ready for GitHub Pages or another static host while development stays split into readable modules.
+1. rebuilds `dist/index.html`;
+2. commits the generated file to this branch when it changes;
+3. publishes it as `main/index.html` for production.
+
+User settings and uploaded icons are stored in browser `localStorage` and included in exported JSON backups.
