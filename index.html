@@ -514,6 +514,7 @@
       justify-content: center;
       background: var(--accent-fill);
       flex-shrink: 0;
+      transform: rotate(var(--paper-counter-angle));
     }
 
     .card-icon .website-favicon,
@@ -1395,6 +1396,10 @@
         transform: translate(4px, 4px) rotate(var(--paper-mobile-angle));
       }
 
+      .card-icon {
+        transform: rotate(var(--paper-mobile-counter-angle));
+      }
+
     }
 
     @media (max-width: 540px) and (hover: hover) and (pointer: fine) {
@@ -1965,7 +1970,7 @@
       const tapeAngle = (random() * 17 - 8.5).toFixed(1);
       return {
         tape,
-        style: `--paper-angle:${angle}deg;--paper-mobile-angle:${Number(angle) * 0.3}deg;--paper-trim:${trim.toFixed(1)}px;--paper-inset:${inset.toFixed(1)}px;--paper-drop:${drop}px;--paper-height:${height}px;--tape-left:${left}%;--tape-width:${width}px;--tape-angle:${tapeAngle}deg`
+        style: `--paper-angle:${angle}deg;--paper-counter-angle:${-Number(angle)}deg;--paper-mobile-angle:${Number(angle) * 0.3}deg;--paper-mobile-counter-angle:${Number(angle) * -0.3}deg;--paper-trim:${trim.toFixed(1)}px;--paper-inset:${inset.toFixed(1)}px;--paper-drop:${drop}px;--paper-height:${height}px;--tape-left:${left}%;--tape-width:${width}px;--tape-angle:${tapeAngle}deg`
       };
     }
 
