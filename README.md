@@ -9,15 +9,7 @@ A personal homepage for organizing website shortcuts. It supports categories, se
 | `dev` | Modular source code for development |
 | `main` | Compiled single-file production build |
 
-## Develop
-
-Run the modular source with any static server:
-
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1
-```
-
-Open `http://127.0.0.1:8000/`. The project has no runtime dependencies. See [ARCHITECTURE.md](ARCHITECTURE.md) for the file map and storage schema.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the file map and storage schema.
 
 ## Build
 
