@@ -32,7 +32,7 @@ Run `npm run build` to generate `dist/index.html`. The script reads `index.html`
 
 The build has no package dependencies and requires Node.js 18 or newer. `dist/index.html` is generated output and should not be edited directly. GitHub Actions runs the same command on every source push and pull request. For pushes, it commits an updated file back to the source branch so the result is visible in the GitHub file browser. It also uploads the file as the `doodle-homepage-single-file` artifact.
 
-Pushes to `refactor/modular-frontend` also publish the compiled HTML to `main/index.html`. The `main` branch is the production branch; make application changes in the modular source branch so production is always generated from reviewed source.
+Pushes to `dev` also publish the compiled HTML to `main/index.html`. The `main` branch is the production branch; make application changes in `dev` so production is always generated from reviewed source.
 
 ## Stored data
 

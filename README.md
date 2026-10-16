@@ -6,7 +6,7 @@ A personal homepage for organizing website shortcuts. It supports categories, se
 
 | Branch | Purpose |
 | --- | --- |
-| `refactor/modular-frontend` | Modular source code for development |
+| `dev` | Modular source code for development |
 | `main` | Compiled single-file production build |
 
 ## Develop
