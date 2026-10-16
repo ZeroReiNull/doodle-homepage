@@ -1791,6 +1791,7 @@
     const CUSTOM_ICON_TYPES = new Set(["image/png", "image/jpeg", "image/webp", "image/x-icon", "image/vnd.microsoft.icon"]);
     const CUSTOM_ICON_LIMIT = 5 * 1024 * 1024;
     const CUSTOM_ICON_DATA_LIMIT = Math.ceil(CUSTOM_ICON_LIMIT * 4 / 3) + 100;
+    const CROPPED_ICON_SIZE = 1024;
 
     function validCustomIcon(value) {
       return typeof value === "string" && value.length <= CUSTOM_ICON_DATA_LIMIT &&
@@ -1917,8 +1918,8 @@
     document.getElementById("apply-icon-crop").addEventListener("click", () => {
       if (!cropState) return;
       const output = document.createElement("canvas");
-      output.width = 512;
-      output.height = 512;
+      output.width = CROPPED_ICON_SIZE;
+      output.height = CROPPED_ICON_SIZE;
       const context = output.getContext("2d");
       context.drawImage(cropCanvas, 0, 0, cropCanvas.width, cropCanvas.height, 0, 0, output.width, output.height);
       finishIconCrop(output.toDataURL("image/png"));
