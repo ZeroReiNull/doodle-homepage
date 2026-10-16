@@ -1,6 +1,6 @@
 # Doodle Homepage architecture
 
-The project has no build step or runtime dependencies. Serve the repository as static files and edit the source directly.
+The project has no runtime dependencies. Serve the modular source as static files during development, or use the optional build script to produce one HTML file.
 
 ## File map
 
@@ -25,6 +25,12 @@ Scripts load in dependency order:
 8. `js/app.js` — small application entry point.
 
 These are ordered classic scripts because the page is designed to work when served by any basic static server without a bundler. Shared bindings are declared once and consumed only by files loaded after them. Each file header lists its role and important dependencies.
+
+## Single-file output
+
+Run `npm run build` to generate `dist/index.html`. The script reads `index.html`, finds local stylesheet and script references, and inlines them in their existing order. It deliberately leaves remote webfont links unchanged.
+
+The build has no package dependencies and requires Node.js 18 or newer. `dist/` is ignored because it is generated output. GitHub Actions runs the same command on every push and pull request, then uploads `dist/index.html` as the `doodle-homepage-single-file` artifact.
 
 ## Stored data
 
