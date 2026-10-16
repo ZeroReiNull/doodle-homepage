@@ -35,3 +35,7 @@ npm run build
 The result is written to [`dist/index.html`](dist/index.html). External webfont links remain external, while the complete application code and styling are contained in the generated file. Edit the modular source files rather than the generated file.
 
 The `Build single-file homepage` GitHub Actions workflow runs on every source push and pull request. After a push, it commits an updated `dist/index.html` back to that branch, so the compiled file can be viewed and downloaded directly in GitHub. It also provides a `doodle-homepage-single-file` workflow artifact.
+
+## Production branch
+
+`refactor/modular-frontend` is the modular source branch. After that branch builds successfully, the workflow publishes the compiled file to `main/index.html`. This keeps `main` ready for GitHub Pages or another static host while development stays split into readable modules.

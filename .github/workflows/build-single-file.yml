@@ -47,3 +47,22 @@ jobs:
           path: dist/index.html
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish compiled homepage to main
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'refactor/modular-frontend'
+        env:
+          PRODUCTION_WORKTREE: ${{ runner.temp }}/doodle-homepage-production
+        run: |
+          git fetch origin main
+          git worktree add "${PRODUCTION_WORKTREE}" origin/main
+          cp dist/index.html "${PRODUCTION_WORKTREE}/index.html"
+          cd "${PRODUCTION_WORKTREE}"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "main/index.html is already current."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Deploy production homepage"
+            git push origin HEAD:main
+          fi
