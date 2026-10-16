@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Doodle Space | Personal Portal</title>
-  <link id="site-favicon" rel="icon" type="image/svg+xml" />
+  <link id="site-favicon" rel="icon" />
   <meta name="color-scheme" content="light dark" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -78,7 +78,6 @@
       "填写可直接访问的 JSON 链接；跨站链接需要允许跨域访问（CORS）。": "Use a direct JSON URL. Cross-origin links must allow CORS.",
       "请求超时，请重试。": "Request timed out. Try again.",
       "无法读取链接，请检查地址、网络及跨域权限（CORS）。": "Unable to read the URL. Check the address, network and CORS permissions.",
-      "文件不能超过 2 MB。": "File must not exceed 2 MB.",
       "只支持 HTTP 或 HTTPS 链接。": "Only HTTP and HTTPS URLs are supported.",
       "导入来源": "Import source",
       "导出备份": "Export backup",
@@ -87,7 +86,6 @@
       "URL 链接": "URL link",
       "选择 JSON 文件": "Choose JSON file",
       "保存当前标题、简介、分类、站点及顺序，方便以后恢复。": "Save the current title, bio, categories, websites and order for later restoration.",
-      "选择之前导出的 JSON 文件（最大 2 MB）。": "Choose a previously exported JSON file (up to 2 MB).",
       "文件读取并校验后，会请你确认是否替换当前配置。": "After reading and validating the backup, you will be asked to confirm replacing the current configuration.",
       "读取链接并导入": "Read URL & import",
       "卡片图标": "Card icon",
@@ -99,6 +97,11 @@
       "代码": "Code",
       "房屋": "Home",
       "爱心": "Heart",
+      "网站图标": "Website icon",
+      "自定义": "Custom",
+      "上传自定义图标": "Upload custom icon",
+      "图标文件不能超过 5 MB。": "Icon file must not exceed 5 MB.",
+      "请选择 PNG、JPEG、WebP 或 ICO 图片。": "Choose a PNG, JPEG, WebP or ICO image.",
       "清空搜索": "Clear search",
       "没有找到匹配的站点": "No matching websites",
       "试试更少的关键词，或清除筛选。": "Try fewer keywords or clear the filters.",
@@ -493,11 +496,6 @@
       overflow-wrap: anywhere;
     }
 
-    .site-card:hover {
-      transform: translate(-2px, -4px) rotate(var(--paper-angle));
-      box-shadow: 6px 8px 0 var(--shadow-ink);
-    }
-
     .card-top {
       display: flex;
       justify-content: space-between;
@@ -518,6 +516,22 @@
       flex-shrink: 0;
     }
 
+    .card-icon .website-favicon,
+    .custom-icon-preview {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .card-icon .website-favicon + svg {
+      display: none;
+    }
+
+    .card-icon .website-favicon[hidden] + svg {
+      display: block;
+    }
+
     .card-tag {
       font-size: 0.76rem;
       font-weight: 700;
@@ -535,13 +549,6 @@
       display: flex;
       align-items: center;
       gap: 0.35rem;
-    }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--ink-muted);
-      margin-bottom: 1rem;
-      flex-grow: 1;
     }
 
     .card-footer {
@@ -735,10 +742,6 @@
       padding: 0.7rem 0;
       border-bottom: 1px dashed var(--border-ink);
       transition: background-color var(--hover-speed) ease;
-    }
-
-    .manage-row:hover {
-      background-color: var(--accent-fill);
     }
 
     .manage-row .row-name {
@@ -976,11 +979,6 @@
       cursor: pointer;
     }
 
-    .form-group #language-select:hover {
-      background: var(--accent-fill);
-      box-shadow: 4px 4px 0 var(--shadow-ink);
-    }
-
     #language-select option {
       background: var(--card-bg);
       color: var(--ink);
@@ -1005,9 +1003,15 @@
       display: inline-flex;
       align-items: center;
       justify-self: start;
-      gap: 0.6rem;
+      gap: 0.45rem;
       margin: 0;
-      min-height: 44px;
+      min-height: 36px;
+      padding: 0.25rem 0.55rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-ink);
+      border-radius: 220px 18px 200px 18px / 18px 210px 16px 230px;
+      box-shadow: 3px 3px 0 var(--shadow-ink);
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -1026,25 +1030,24 @@
     .theme-switch-track {
       display: inline-block;
       position: relative;
-      flex: 0 0 44px;
-      width: 44px;
-      height: 25px;
+      flex: 0 0 36px;
+      width: 36px;
+      height: 21px;
       background: var(--accent-fill);
       border: 2px solid var(--border-ink);
-      border-radius: 3px 2px 4px 2px;
-      box-shadow: 2px 2px 0 var(--shadow-ink);
+      border-radius: 18px 14px 17px 13px / 13px 17px 14px 18px;
     }
 
     .theme-switch-track::before {
       content: "";
       position: absolute;
-      left: 3px;
-      top: 3px;
-      width: 15px;
-      height: 15px;
+      left: 2px;
+      top: 2px;
+      width: 13px;
+      height: 13px;
       background: var(--card-bg);
       border: 2px solid var(--border-ink);
-      border-radius: 1px 2px 1px 2px;
+      border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
       transition: transform var(--hover-speed) ease;
     }
 
@@ -1053,7 +1056,7 @@
     }
 
     #follow-system:checked + .theme-switch-track::before {
-      transform: translateX(19px);
+      transform: translateX(15px);
     }
 
     #follow-system:focus-visible + .theme-switch-track {
@@ -1063,6 +1066,7 @@
 
     /* Lift Hitbox & Unified Hover Transitions */
     .sketch-btn,
+    .theme-follow,
     .import-choice,
     .icon-option,
     .search-wrapper,
@@ -1170,30 +1174,9 @@
       width: 100%;
     }
 
-    .lift-hitbox:hover > .sketch-btn {
-      left: -2px;
-      top: -2px;
-      box-shadow: 5px 5px 0px var(--shadow-ink);
-      background: var(--accent-fill);
-    }
-
-    .lift-hitbox:hover > .sketch-btn.active,
-    #category-filters .lift-hitbox:hover > .sketch-btn.active {
-      background: var(--ink);
-      color: var(--bg);
-    }
-
-    .lift-hitbox:hover > .sketch-btn:active {
-      left: 2px;
-      top: 2px;
-      box-shadow: 1px 1px 0 var(--shadow-ink);
-    }
-
-    .lift-hitbox:hover > .sketch-btn:disabled {
-      left: 0;
-      top: 0;
-      transform: none;
-      box-shadow: none;
+    .theme-controls > .lift-hitbox:has(> .theme-follow) {
+      width: auto;
+      justify-self: start;
     }
 
     #category-filters .lift-hitbox {
@@ -1210,9 +1193,7 @@
       pointer-events: none;
     }
 
-    #category-filters .sketch-btn,
-    #category-filters .lift-hitbox:hover > .sketch-btn,
-    #category-filters .lift-hitbox:hover > .sketch-btn:active {
+    #category-filters .sketch-btn {
       box-shadow: none;
     }
 
@@ -1260,6 +1241,51 @@
     }
 
     @media (hover: hover) and (pointer: fine) {
+      .site-card:hover {
+        transform: translate(-2px, -4px) rotate(var(--paper-angle));
+        box-shadow: 6px 8px 0 var(--shadow-ink);
+      }
+
+      .manage-row:hover {
+        background-color: var(--accent-fill);
+      }
+
+      .form-group #language-select:hover {
+        background: var(--accent-fill);
+        box-shadow: 4px 4px 0 var(--shadow-ink);
+      }
+
+      .lift-hitbox:hover > .sketch-btn {
+        left: -2px;
+        top: -2px;
+        box-shadow: 5px 5px 0px var(--shadow-ink);
+        background: var(--accent-fill);
+      }
+
+      .lift-hitbox:hover > .sketch-btn.active,
+      #category-filters .lift-hitbox:hover > .sketch-btn.active {
+        background: var(--ink);
+        color: var(--bg);
+      }
+
+      .lift-hitbox:hover > .sketch-btn:active {
+        left: 2px;
+        top: 2px;
+        box-shadow: 1px 1px 0 var(--shadow-ink);
+      }
+
+      .lift-hitbox:hover > .sketch-btn:disabled {
+        left: 0;
+        top: 0;
+        transform: none;
+        box-shadow: none;
+      }
+
+      #category-filters .lift-hitbox:hover > .sketch-btn,
+      #category-filters .lift-hitbox:hover > .sketch-btn:active {
+        box-shadow: none;
+      }
+
       .form-group .lift-hitbox:hover > input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
       .form-group .lift-hitbox:hover > textarea,
       .form-group .lift-hitbox:hover > select:not(#language-select),
@@ -1293,13 +1319,14 @@
         box-shadow: 5px 5px 0 var(--shadow-ink);
       }
 
-      .theme-follow:hover .theme-switch-track {
+      .lift-hitbox:hover > .theme-follow {
         left: -2px;
         top: -2px;
-        box-shadow: 4px 4px 0 var(--shadow-ink);
+        box-shadow: 5px 5px 0 var(--shadow-ink);
+        background: var(--accent-fill);
       }
 
-      .theme-follow:active .theme-switch-track {
+      .lift-hitbox:hover > .theme-follow:active {
         left: 1px;
         top: 1px;
         box-shadow: 1px 1px 0 var(--shadow-ink);
@@ -1349,10 +1376,6 @@
         transform: translate(4px, 4px) rotate(var(--paper-mobile-angle));
       }
 
-      .site-card:hover {
-        transform: translateY(-2px) rotate(var(--paper-mobile-angle));
-        box-shadow: 4px 6px 0 var(--shadow-ink);
-      }
     }
 
     @media (max-width: 540px) and (hover: hover) and (pointer: fine) {
@@ -1519,7 +1542,6 @@
         </div>
         <div style="border-top:1px dashed var(--border-ink);padding-top:1rem;margin-top:1.2rem">
           <button id="reset-settings-btn" class="sketch-btn" type="button" data-i18n="恢复默认设置">Restore defaults</button>
-          <p class="manage-note" style="margin-top:0.6rem" data-i18n="重置站点、分类、标题、图标、语言和主题。">Reset websites, categories, titles, icons, language and theme.</p>
         </div>
       </section>
 
@@ -1544,7 +1566,6 @@
             </label>
           </fieldset>
           <div id="import-file-panel" class="import-panel">
-            <p class="manage-note" data-i18n="选择之前导出的 JSON 文件（最大 2 MB）。">Choose a previously exported JSON file (up to 2 MB).</p>
             <button class="sketch-btn" type="button" onclick="document.getElementById('import-config').click()" data-i18n="选择 JSON 文件">Choose JSON file</button>
             <input type="file" id="import-config" accept=".json,application/json" hidden />
           </div>
@@ -1585,10 +1606,7 @@
           <legend data-i18n="卡片图标">Card icon</legend>
           <div id="site-icon-options" style="display:contents"></div>
         </fieldset>
-        <div class="form-group">
-          <label for="site-desc" data-i18n="一句话简介">Short description</label>
-          <textarea id="site-desc" rows="2" placeholder="Briefly describe this website..." data-i18n-placeholder="简单描述这个站点的功能或用途..."></textarea>
-        </div>
+        <input id="custom-site-icon-file" type="file" accept="image/png,image/jpeg,image/webp,image/x-icon,.ico" hidden />
         <div style="display:flex; justify-content:space-between; gap:0.5rem; margin-top:1.2rem;">
           <button type="button" class="sketch-btn" id="delete-site-btn" style="display:none;" data-i18n="删除站点">Delete website</button>
           <div style="display:flex; gap:0.5rem; margin-left:auto;">
@@ -1608,13 +1626,12 @@
         <div class="form-group">
           <label for="input-browser-title" data-i18n="浏览器标签页标题">Browser tab title</label>
           <input type="text" id="input-browser-title" maxlength="200" placeholder="Leave blank to use the default title" data-i18n-placeholder="留空使用默认标题" />
-          <p class="manage-note" data-i18n="显示在浏览器标签页，与页面主标题独立。">Shown in the browser tab, independently of the homepage heading.</p>
         </div>
         <fieldset class="icon-picker">
           <legend data-i18n="浏览器标签页图标">Browser tab icon</legend>
           <div id="favicon-options" style="display:contents"></div>
         </fieldset>
-        <p class="manage-note" data-i18n="与标题一起保存，刷新后保留。">Saved together with the title and retained after refresh.</p>
+        <input id="custom-favicon-file" type="file" accept="image/png,image/jpeg,image/webp,image/x-icon,.ico" hidden />
         <div class="form-group">
           <label for="input-owner-title" data-i18n="主页主标题">Homepage title</label>
           <input type="text" id="input-owner-title" required />
@@ -1685,6 +1702,33 @@
       heart: "爱心"
     };
 
+    const CUSTOM_ICON_TYPES = new Set(["image/png", "image/jpeg", "image/webp", "image/x-icon", "image/vnd.microsoft.icon"]);
+    const CUSTOM_ICON_LIMIT = 5 * 1024 * 1024;
+    const CUSTOM_ICON_DATA_LIMIT = Math.ceil(CUSTOM_ICON_LIMIT * 4 / 3) + 100;
+
+    function validCustomIcon(value) {
+      return typeof value === "string" && value.length <= CUSTOM_ICON_DATA_LIMIT &&
+        /^data:image\/(?:png|jpeg|webp|x-icon|vnd\.microsoft\.icon);base64,[a-z0-9+/=]+$/i.test(value);
+    }
+
+    async function readCustomIcon(file) {
+      if (file.size > CUSTOM_ICON_LIMIT) throw new Error(t("图标文件不能超过 5 MB。"));
+      const iconType = CUSTOM_ICON_TYPES.has(file.type)
+        ? file.type
+        : (/\.ico$/i.test(file.name) ? "image/x-icon" : "");
+      if (!iconType) throw new Error(t("请选择 PNG、JPEG、WebP 或 ICO 图片。"));
+      const result = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(file.type
+          ? reader.result
+          : String(reader.result).replace(/^data:[^;,]+/, "data:" + iconType));
+        reader.onerror = () => reject(reader.error || new Error("Unable to read icon."));
+        reader.readAsDataURL(file);
+      });
+      if (!validCustomIcon(result)) throw new Error(t("请选择 PNG、JPEG、WebP 或 ICO 图片。"));
+      return result;
+    }
+
     function renderIconOptions(containerId, inputName, selected) {
       document.getElementById(containerId).innerHTML = Object.keys(ICONS).map(key =>
         `<label class="icon-option">
@@ -1695,14 +1739,51 @@
     }
 
     function renderIconPicker(selected) {
+      const customIcon = validCustomIcon(pendingCustomSiteIcon) ? pendingCustomSiteIcon : "";
       selected = selected || document.querySelector('input[name="site-icon"]:checked')?.value || "star";
       renderIconOptions("site-icon-options", "site-icon", selected);
+      document.getElementById("site-icon-options").insertAdjacentHTML("beforeend", `
+        <label class="icon-option">
+          <input class="sr-only" type="radio" name="site-icon" value="website" ${selected === "website" ? "checked" : ""} />
+          ${ICONS.globe}<span>${t("网站图标")}</span>
+        </label>
+        <label class="icon-option">
+          <input class="sr-only" type="radio" name="site-icon" value="custom" ${selected === "custom" ? "checked" : ""} />
+          ${customIcon ? `<img class="custom-icon-preview" src="${customIcon}" alt="" />` : ICONS.globe}<span>${t("自定义")}</span>
+        </label>`);
     }
 
+    let pendingCustomSiteIcon = "";
+    let pendingCustomFavicon = "";
+
     function renderFaviconPicker(selected) {
-      selected = selected || (Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star");
+      const customIcon = validCustomIcon(pendingCustomFavicon)
+        ? pendingCustomFavicon
+        : (validCustomIcon(profile.customFavicon) ? profile.customFavicon : "");
+      selected = selected || (profile.favicon === "custom" && validCustomIcon(profile.customFavicon)
+        ? "custom"
+        : (Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star"));
       renderIconOptions("favicon-options", "favicon-icon", selected);
+      const preview = customIcon
+        ? `<img class="custom-icon-preview" src="${customIcon}" alt="" />`
+        : ICONS.globe;
+      document.getElementById("favicon-options").insertAdjacentHTML("beforeend", `
+        <label class="icon-option">
+          <input class="sr-only" type="radio" name="favicon-icon" value="custom" ${selected === "custom" ? "checked" : ""} />
+          ${preview}<span>${t("自定义")}</span>
+        </label>`);
     }
+
+    function connectCustomIconPicker(containerId, inputName, fileInputId) {
+      document.getElementById(containerId).addEventListener("click", e => {
+        if (e.target.matches(`input[name="${inputName}"][value="custom"]`)) {
+          document.getElementById(fileInputId).click();
+        }
+      });
+    }
+
+    connectCustomIconPicker("site-icon-options", "site-icon", "custom-site-icon-file");
+    connectCustomIconPicker("favicon-options", "favicon-icon", "custom-favicon-file");
 
     let sites = JSON.parse(localStorage.getItem("doodle_sites_v1")) || DEFAULT_SITES;
     let profile = JSON.parse(localStorage.getItem("doodle_profile_v1")) || {
@@ -1786,6 +1867,10 @@
     }
 
     function updateFavicon() {
+      if (profile.favicon === "custom" && validCustomIcon(profile.customFavicon)) {
+        document.getElementById("site-favicon").setAttribute("href", profile.customFavicon);
+        return;
+      }
       const key = Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star";
       const svg = ICONS[key]
         .replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')
@@ -1858,6 +1943,20 @@
       };
     }
 
+    function websiteIconMarkup(site) {
+      if (site.icon === "custom" && validCustomIcon(site.customIcon)) {
+        return `<img class="custom-icon-preview" src="${site.customIcon}" alt="" />`;
+      }
+      if (site.icon !== "website") return ICONS[site.icon] || ICONS.star;
+      let favicon = "";
+      try {
+        const url = new URL(site.url);
+        if (["http:", "https:"].includes(url.protocol)) favicon = new URL("/favicon.ico", url.origin).href;
+      } catch (_) {}
+      if (!favicon) return ICONS.globe;
+      return `<img class="website-favicon" src="${escapeHTML(favicon)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />${ICONS.globe}`;
+    }
+
     function renderSites() {
       const grid = document.getElementById("sites-grid");
       const positions = capturePositions(grid);
@@ -1886,7 +1985,7 @@
       } else {
         grid.innerHTML = filtered.map((site, i) => {
           const boxClass = i % 2 === 0 ? "sketch-box" : "sketch-box-alt";
-          const iconSvg = ICONS[site.icon] || ICONS.star;
+          const iconSvg = websiteIconMarkup(site);
           const paper = paperDetails(site);
           return `
             <a data-motion-key="${site.motionKey}" style="${paper.style}" class="site-card ${boxClass}" href="${escapeHTML(site.url)}" target="_blank" rel="noopener noreferrer">
@@ -1899,7 +1998,6 @@
                   </div>
                 </div>
                 <h3 class="card-title">${escapeHTML(site.title)}</h3>
-                <p class="card-desc">${escapeHTML(site.desc)}</p>
               </div>
               <div class="card-footer">
                 <span class="card-url">${escapeHTML(site.url)}</span>
@@ -2255,8 +2353,9 @@
       document.getElementById("site-title").value = "";
       document.getElementById("site-url").value = "https://";
       document.getElementById("site-cat").value = categories[0] || "";
-      document.getElementById("site-desc").value = "";
-      renderIconPicker("star");
+      pendingCustomSiteIcon = "";
+      renderIconPicker("website");
+      document.getElementById("custom-site-icon-file").value = "";
       document.getElementById("delete-site-btn").style.display = "none";
       openDialog("site-modal");
     });
@@ -2268,23 +2367,45 @@
       document.getElementById("site-title").value = s.title;
       document.getElementById("site-url").value = s.url;
       document.getElementById("site-cat").value = s.category;
-      document.getElementById("site-desc").value = s.desc;
-      renderIconPicker(Object.hasOwn(ICONS, s.icon) ? s.icon : "star");
+      pendingCustomSiteIcon = validCustomIcon(s.customIcon) ? s.customIcon : "";
+      renderIconPicker(s.icon === "website" || s.icon === "custom" || Object.hasOwn(ICONS, s.icon) ? s.icon : "star");
+      document.getElementById("custom-site-icon-file").value = "";
       document.getElementById("delete-site-btn").style.display = "inline-flex";
       openDialog("site-modal");
     };
 
     window.closeSiteModal = openManagement;
 
+    document.getElementById("custom-site-icon-file").addEventListener("change", async e => {
+      const input = e.target;
+      const file = input.files[0];
+      if (!file) return;
+      try {
+        pendingCustomSiteIcon = await readCustomIcon(file);
+        renderIconPicker("custom");
+      } catch (error) {
+        input.value = "";
+        alert(error.message);
+      }
+    });
+
     document.getElementById("site-form").addEventListener("submit", e => {
       e.preventDefault();
       const idx = parseInt(document.getElementById("site-index").value, 10);
+      const selectedIcon = document.querySelector('input[name="site-icon"]:checked')?.value || "star";
+      if (selectedIcon === "custom" && !validCustomIcon(pendingCustomSiteIcon)) {
+        document.getElementById("custom-site-icon-file").click();
+        return;
+      }
       const newSite = {
         title: document.getElementById("site-title").value.trim(),
         url: document.getElementById("site-url").value.trim(),
         category: document.getElementById("site-cat").value,
-        desc: document.getElementById("site-desc").value.trim(),
-        icon: document.querySelector('input[name="site-icon"]:checked')?.value || "star"
+        desc: idx >= 0 ? (sites[idx].desc || "") : "",
+        icon: selectedIcon,
+        ...(selectedIcon === "custom" && validCustomIcon(pendingCustomSiteIcon)
+          ? { customIcon: pendingCustomSiteIcon }
+          : {})
       };
       if (idx >= 0) sites[idx] = newSite;
       else sites.push(newSite);
@@ -2306,7 +2427,9 @@
     // Profile Modal
     window.openEditProfileModal = function() {
       managementPage = "settings";
+      pendingCustomFavicon = validCustomIcon(profile.customFavicon) ? profile.customFavicon : "";
       renderFaviconPicker();
+      document.getElementById("custom-favicon-file").value = "";
       document.getElementById("input-browser-title").value = profile.browserTitle || "";
       document.getElementById("input-owner-title").value = profile.title;
       document.getElementById("input-owner-bio").value = profile.bio;
@@ -2315,9 +2438,32 @@
 
     window.closeProfileModal = openManagement;
 
+    document.getElementById("custom-favicon-file").addEventListener("change", async e => {
+      const input = e.target;
+      const file = input.files[0];
+      if (!file) return;
+      try {
+        pendingCustomFavicon = await readCustomIcon(file);
+        renderFaviconPicker("custom");
+      } catch (error) {
+        input.value = "";
+        alert(error.message);
+      }
+    });
+
     document.getElementById("profile-form").addEventListener("submit", e => {
       e.preventDefault();
       profile.favicon = document.querySelector('input[name="favicon-icon"]:checked')?.value || "star";
+      if (profile.favicon === "custom" && !validCustomIcon(pendingCustomFavicon)) {
+        document.getElementById("custom-favicon-file").click();
+        return;
+      }
+      if (profile.favicon === "custom" && validCustomIcon(pendingCustomFavicon)) {
+        profile.customFavicon = pendingCustomFavicon;
+      } else {
+        profile.favicon = Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star";
+        delete profile.customFavicon;
+      }
       profile.browserTitle = document.getElementById("input-browser-title").value.trim();
       profile.title = document.getElementById("input-owner-title").value.trim();
       profile.bio = document.getElementById("input-owner-bio").value.trim();
@@ -2359,7 +2505,12 @@
           url: url.href,
           desc: site.desc,
           category: site.category,
-          icon: Object.hasOwn(ICONS, site.icon) ? site.icon : "star"
+          icon: site.icon === "custom" && validCustomIcon(site.customIcon)
+            ? "custom"
+            : (site.icon === "website" || Object.hasOwn(ICONS, site.icon) ? site.icon : "star"),
+          ...(site.icon === "custom" && validCustomIcon(site.customIcon)
+            ? { customIcon: site.customIcon }
+            : {})
         };
       });
 
@@ -2377,7 +2528,12 @@
           title: data.profile.title.trim(),
           bio: data.profile.bio,
           browserTitle: (data.profile.browserTitle || "").trim(),
-          favicon: Object.hasOwn(ICONS, data.profile.favicon) ? data.profile.favicon : "star"
+          favicon: data.profile.favicon === "custom" && validCustomIcon(data.profile.customFavicon)
+            ? "custom"
+            : (Object.hasOwn(ICONS, data.profile.favicon) ? data.profile.favicon : "star"),
+          ...(data.profile.favicon === "custom" && validCustomIcon(data.profile.customFavicon)
+            ? { customFavicon: data.profile.customFavicon }
+            : {})
         },
         categories: importedCategories,
         sites: importedSites
@@ -2422,7 +2578,6 @@
       const file = input.files[0];
       if (!file) return;
       try {
-        if (file.size > 2 * 1024 * 1024) throw new Error(t("文件不能超过 2 MB。"));
         const imported = normalizeConfig(JSON.parse(await file.text()));
         importConfiguration(imported);
       } catch (error) {
@@ -2440,37 +2595,7 @@
       try {
         const response = await fetch(url.href, { signal: controller.signal, credentials: "omit" });
         if (!response.ok) throw new Error("HTTP " + response.status);
-        const limit = 2 * 1024 * 1024;
-        if (Number(response.headers.get("content-length")) > limit) {
-          await response.body?.cancel();
-          throw new Error(t("文件不能超过 2 MB。"));
-        }
-        let content;
-        if (response.body) {
-          const reader = response.body.getReader();
-          const chunks = [];
-          let size = 0;
-          while (true) {
-            const { done, value: chunk } = await reader.read();
-            if (done) break;
-            size += chunk.byteLength;
-            if (size > limit) {
-              await reader.cancel();
-              throw new Error(t("文件不能超过 2 MB。"));
-            }
-            chunks.push(chunk);
-          }
-          const bytes = new Uint8Array(size);
-          let offset = 0;
-          chunks.forEach(chunk => {
-            bytes.set(chunk, offset);
-            offset += chunk.byteLength;
-          });
-          content = new TextDecoder().decode(bytes);
-        } else {
-          content = await response.text();
-          if (new TextEncoder().encode(content).byteLength > limit) throw new Error(t("文件不能超过 2 MB。"));
-        }
+        const content = await response.text();
         return normalizeConfig(JSON.parse(content.replace(/^\uFEFF/, "")));
       } catch (error) {
         if (error.name === "AbortError") throw new Error(t("请求超时，请重试。"));
@@ -2604,7 +2729,7 @@
 
     // Hover Hitbox Stabilizer
     function stabilizeHoverTargets() {
-      const targets = '.site-card, #site-manager .manage-row, .sketch-btn, .import-choice, .icon-option, .search-wrapper, .language-picker, .hero, .doodle-pad-section, .form-group textarea, .form-group select:not(#language-select), .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"])';
+      const targets = '.site-card, #site-manager .manage-row, .sketch-btn, .theme-follow, .import-choice, .icon-option, .search-wrapper, .language-picker, .hero, .doodle-pad-section, .form-group textarea, .form-group select:not(#language-select), .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"])';
       document.querySelectorAll(targets).forEach(control => {
         if (control.parentElement.classList.contains("lift-hitbox")) return;
         const box = document.createElement("div");
