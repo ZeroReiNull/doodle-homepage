@@ -30,7 +30,7 @@ These are ordered classic scripts because the page is designed to work when serv
 
 Run `npm run build` to generate `dist/index.html`. The script reads `index.html`, finds local stylesheet and script references, and inlines them in their existing order. It deliberately leaves remote webfont links unchanged.
 
-The build has no package dependencies and requires Node.js 18 or newer. `dist/` is ignored because it is generated output. GitHub Actions runs the same command on every push and pull request, then uploads `dist/index.html` as the `doodle-homepage-single-file` artifact.
+The build has no package dependencies and requires Node.js 18 or newer. `dist/index.html` is generated output and should not be edited directly. GitHub Actions runs the same command on every source push and pull request. For pushes, it commits an updated file back to the source branch so the result is visible in the GitHub file browser. It also uploads the file as the `doodle-homepage-single-file` artifact.
 
 ## Stored data
 
