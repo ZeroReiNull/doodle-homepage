@@ -4,7 +4,7 @@ This is the production branch. [`index.html`](index.html) is the compiled single
 
 ## Development
 
-Do not edit the production HTML directly. Make changes in the [`refactor/modular-frontend`](https://github.com/ZeroReiNull/doodle-homepage/tree/refactor/modular-frontend) branch, where the HTML, CSS, and JavaScript are split into readable modules.
+Do not edit the production HTML directly. Make changes in the [`dev`](https://github.com/ZeroReiNull/doodle-homepage/tree/dev) branch, where the HTML, CSS, and JavaScript are split into readable modules.
 
 Publishing is automatic:
 
