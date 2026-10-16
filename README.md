@@ -1,15 +1,15 @@
 # Doodle Homepage
 
-A lightweight personal homepage for organizing the websites, tools, and dashboards you use every day.
+This is the production branch. [`index.html`](index.html) is the compiled single-file homepage and can be hosted directly with GitHub Pages or any static web server.
 
-It is a single-file web app with:
+## Development
 
-- a homepage for favorite links
-- category filtering and search
-- a doodle pad for fun
-- light/dark mode and language switching
-- editable homepage title, bio, favicon, and browser tab title
-- local backup/import/export so your setup survives
+Do not edit the production HTML directly. Make changes in the [`refactor/modular-frontend`](https://github.com/ZeroReiNull/doodle-homepage/tree/refactor/modular-frontend) branch, where the HTML, CSS, and JavaScript are split into readable modules.
 
-## Notes
-Everything is stored in the browser using `localStorage`, so your setup persists on the same browser/device unless you clear site data.
+Publishing is automatic:
+
+1. push changes to the source branch;
+2. GitHub Actions builds the single HTML file;
+3. the generated file replaces `main/index.html`.
+
+User settings and uploaded icons are stored in browser `localStorage`. They can be moved between browsers with the built-in JSON backup.
