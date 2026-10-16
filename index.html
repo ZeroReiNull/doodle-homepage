@@ -530,6 +530,18 @@
       border-radius: 30%;
     }
 
+    .card-icon:has(.website-favicon:not([hidden])) {
+      border: 0;
+      background: transparent;
+      overflow: visible;
+    }
+
+    .card-icon .website-favicon {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .card-icon .custom-icon-preview {
       width: 100%;
       height: 100%;
@@ -1777,6 +1789,8 @@
       home: iconSVG('<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/>'),
       heart: iconSVG('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>')
     };
+    const WEBSITE_ICON = iconSVG('<path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.15 1.15"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.15-1.15"/>');
+    const UPLOAD_ICON = iconSVG('<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/><path d="M16 3v6m-3-3h6"/>');
     const ICON_LABELS = {
       star: "星星",
       gear: "齿轮",
@@ -1941,11 +1955,11 @@
       document.getElementById("site-icon-options").insertAdjacentHTML("beforeend", `
         <label class="icon-option">
           <input class="sr-only" type="radio" name="site-icon" value="website" ${selected === "website" ? "checked" : ""} />
-          <span class="icon-squircle">${ICONS.globe}</span><span>${t("网站图标")}</span>
+          <span class="icon-squircle">${WEBSITE_ICON}</span><span>${t("网站图标")}</span>
         </label>
         <label class="icon-option">
           <input class="sr-only" type="radio" name="site-icon" value="custom" ${selected === "custom" ? "checked" : ""} />
-          <span class="icon-squircle">${customIcon ? `<img class="custom-icon-preview" src="${customIcon}" alt="" />` : ICONS.globe}</span><span>${t("自定义")}</span>
+          <span class="icon-squircle">${customIcon ? `<img class="custom-icon-preview" src="${customIcon}" alt="" />` : UPLOAD_ICON}</span><span>${t("自定义")}</span>
         </label>`);
     }
 
@@ -1962,7 +1976,7 @@
       renderIconOptions("favicon-options", "favicon-icon", selected);
       const preview = customIcon
         ? `<img class="custom-icon-preview" src="${customIcon}" alt="" />`
-        : ICONS.globe;
+        : UPLOAD_ICON;
       document.getElementById("favicon-options").insertAdjacentHTML("beforeend", `
         <label class="icon-option">
           <input class="sr-only" type="radio" name="favicon-icon" value="custom" ${selected === "custom" ? "checked" : ""} />
@@ -2063,22 +2077,15 @@
     }
 
     function updateFavicon() {
-      let artwork;
       if (profile.favicon === "custom" && validCustomIcon(profile.customFavicon)) {
-        artwork = `<image href="${profile.customFavicon}" x="5" y="5" width="22" height="22" preserveAspectRatio="xMidYMid meet" clip-path="url(#icon-clip)" />`;
-      } else {
-        const key = Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star";
-        const iconContent = ICONS[key]
-          .replace(/^<svg[^>]*>/, "")
-          .replace(/<\/svg>$/, "")
-          .replace(/currentColor/g, "#444444");
-        artwork = `<g transform="translate(5 5) scale(0.9167)">${iconContent}</g>`;
+        document.getElementById("site-favicon").setAttribute("href", profile.customFavicon);
+        return;
       }
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-        <defs><clipPath id="icon-clip"><rect x="4" y="4" width="24" height="24" rx="7" /></clipPath></defs>
-        <rect x="1" y="1" width="30" height="30" rx="9" fill="#fffaf0" stroke="#444444" stroke-width="2" />
-        ${artwork}
-      </svg>`;
+      const key = Object.hasOwn(ICONS, profile.favicon) ? profile.favicon : "star";
+      const svg = ICONS[key]
+        .replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')
+        .replace(/width="22" height="22"/, 'width="32" height="32"')
+        .replace(/currentColor/g, "#444444");
       document.getElementById("site-favicon").setAttribute("href", "data:image/svg+xml," + encodeURIComponent(svg));
     }
 
